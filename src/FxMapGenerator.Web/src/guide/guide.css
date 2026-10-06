@@ -1,0 +1,100 @@
+/* The screens' guides: driver.js's box in the app's colours and font (light and dark), and the question box. */
+
+.driver-popover.guide-popover {
+  font: 14px/1.5 "Segoe UI", "Yu Gothic UI", "Meiryo", system-ui, sans-serif;
+  color: var(--text);
+  background-color: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  min-width: 280px;
+  max-width: 360px;
+  padding: 14px 16px;
+}
+.guide-popover .driver-popover-title {
+  font-size: 16px;
+  font-weight: 600;
+  padding-right: 24px;
+}
+.guide-popover .driver-popover-description {
+  font-size: 14px;
+  line-height: 1.6;
+}
+.guide-popover .driver-popover-progress-text {
+  color: var(--muted);
+}
+.guide-popover .driver-popover-close-btn {
+  color: var(--muted);
+}
+.guide-popover .driver-popover-close-btn:hover,
+.guide-popover .driver-popover-close-btn:focus {
+  color: var(--text);
+}
+.guide-popover .driver-popover-footer-btn {
+  font: inherit;
+  font-size: 13px;
+  color: var(--text);
+  text-shadow: none;
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 4px 12px;
+}
+.guide-popover .driver-popover-footer-btn:hover,
+.guide-popover .driver-popover-footer-btn:focus {
+  background: var(--panel-2);
+  border-color: var(--muted);
+}
+.guide-popover .driver-popover-footer-btn:focus-visible,
+.guide-popover .driver-popover-close-btn:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.guide-popover .driver-popover-next-btn,
+.guide-popover .driver-popover-next-btn:hover,
+.guide-popover .driver-popover-next-btn:focus {
+  color: var(--accent-text);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+/* the arrow is the border of one side (driver.css draws it white) */
+.guide-popover .driver-popover-arrow-side-left {
+  border-left-color: var(--panel);
+}
+.guide-popover .driver-popover-arrow-side-right {
+  border-right-color: var(--panel);
+}
+.guide-popover .driver-popover-arrow-side-top {
+  border-top-color: var(--panel);
+}
+.guide-popover .driver-popover-arrow-side-bottom {
+  border-bottom-color: var(--panel);
+}
+
+/* The question the first time a screen is opened: bottom right (above the start screen's footer), over the screens and
+   under the windows (900). */
+.guide-ask {
+  position: fixed;
+  right: 16px;
+  bottom: 64px;
+  z-index: 800;
+  width: min(360px, calc(100% - 32px));
+  padding: 12px 14px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+.guide-ask-text {
+  font-weight: 600;
+}
+.guide-ask-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+.guide-ask-note {
+  margin-top: 8px;
+  font-size: 12px;
+}

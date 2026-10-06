@@ -1,0 +1,36 @@
+{
+  "about": "Estimate defaults in seconds, measured on a 24-core PC over a capture of 986 blocks (674 land, 312 water). Visit, per block and item: the means of a visit of every block, each next to the last one (the whole map in 7,775 s); cameraMove = what a block visited with the camera (a shot or height data) takes beyond its items, once per block (the camera's move to it); farMove = what the move to a block that is not next to the last one adds (the new place streams in), once per group of neighbouring blocks visited with the camera (8 blocks scattered over the map took 9.6 s a block against 7.65 s next to the last one); the scans alone = the means over 142 blocks spread over the map (no camera first, so the ground scan waits for the block to stream); scanCanopy = what the canopy adds to a ground scan (the same 142 blocks); prepare and cleanup = the run's steps before the first block and after the last (stopping and starting again the resources in the way); precheck = the check once connected (its own part about 15 s) with reading its results. Stages: the mean unit time of a run of every step at 12 workers, on one worker per unit; the cell data and the cell drawings per land and per water block of the cell (its margin blocks too, as they are read; fitted to the cells of three runs of the whole map, so small cells and cells of the sea come out right: a water block draws quickly, but its sea's depth bands make its cell data the heavier); game files 13 s the first time (no files in the disk cache). The lower zooms are one worker's time: the step spreads its tiles over the workers (measured on one worker: satellite 171 s, atlas 111-119 s, road map 87 s; on 12 workers 11 s, 10 s and 6-7 s, so the satellite's value is taken between 171 s and 12 x 11 s = 132 s). ortho.scalePerBlock = the first measurement of the scale correction, one worker's time per block of the range (captured by then), spread over the workers (about 24 s at 12 workers for the whole map; only while the project has no measured correction). The road graph and the region colours also work in parallel inside but take a few seconds; they are counted as measured at 12 workers. The planner spreads units over the workers of the chosen parallel level; during a run, a running step is estimated from its own units so far.",
+  "spread": {
+    "visit": [0.9, 1.2],
+    "stage": [0.8, 1.3]
+  },
+  "precheck": [20, 60],
+  "visit": {
+    "prepare": [1, 2],
+    "cleanup": [1, 2],
+    "cameraMove": { "land": 0.71, "water": 0.61 },
+    "farMove": 2.0,
+    "shot": { "land": 0.52, "water": 0.31 },
+    "height": { "land": 1.36, "water": 1.24 },
+    "scanGround": { "land": 3.89, "water": 3.43 },
+    "scanRoads": { "land": 1.75, "water": 1.56 },
+    "scanGroundAlone": { "land": 5.97, "water": 4.08 },
+    "scanRoadsAlone": { "land": 1.81, "water": 1.72 },
+    "scanCanopy": { "land": 0.49, "water": 0.38 }
+  },
+  "stages": {
+    "ortho": { "perBlock": 0.32, "scalePerBlock": 0.29 },
+    "gameFiles": { "fixed": 4.4 },
+    "roadGraph": { "fixed": 6.0 },
+    "landcover": { "perBlock": 0.36 },
+    "regions": { "fixed": 7.0 },
+    "labels": { "perLanguage": 4.5 },
+    "roads": { "fixed": 2.1 },
+    "cells": {
+      "prepPerBlock": { "land": 0.38, "water": 0.56 },
+      "drawPerBlock": { "atlas": { "land": 0.24, "water": 0.063 }, "roadMap": { "land": 0.11, "water": 0.065 } }
+    },
+    "lowZoom": { "satellite": 150, "atlas": 115, "roadMap": 85 },
+    "ytd": { "perSheet": 13.8 }
+  }
+}

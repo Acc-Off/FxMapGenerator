@@ -1,0 +1,15 @@
+{
+  "format": 1,
+  "credit": "Route numbers: GTA Wiki, \"Numbered Highways in GTA V\".",
+  "routes": [
+    {"number": "1", "streets": ["Great Ocean Hwy", "Paleto Blvd"], "text": "{name} // Route 1"},
+    {"number": "11", "streets": ["Tongva Dr", "Zancudo Rd"], "text": "{name} // Route 11"},
+    {"number": "13", "streets": ["Senora Fwy", "Los Santos Freeway"], "text": "Route 13 // {name}"},
+    {"number": "14", "streets": ["North Rockford Dr"], "text": "{name} // Route 14"},
+    {"number": "15", "streets": ["Palomino Fwy"], "text": "Route 15 // {name}"},
+    {"number": "16", "streets": ["Mad Wayne Thunder Dr"], "text": "{name} // Route 16"},
+    {"number": "20", "streets": ["Elysian Fields Fwy"], "text": "Route 20 // {name}"},
+    {"number": "23", "streets": ["Del Perro Fwy"], "text": "Route 23 // {name}"},
+    {"number": "68", "streets": ["Route 68"], "text": "{name}"}
+  ]
+}

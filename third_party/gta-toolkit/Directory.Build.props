@@ -1,0 +1,11 @@
+<Project>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <!-- Vendored from https://github.com/carmineos/gta-toolkit (MIT), commit ff555267 (2023-11-28). Only RageLib and RageLib.GTA5 are included. -->
+    <NoWarn>$(NoWarn);CS8600;CS8601;CS8602;CS8603;CS8604;CS8618;CS8625;CS8765;CS0108;CS0114;CS0168;CS0219;CS0649;CS0414;SYSLIB0001;SYSLIB0011;SYSLIB0021;SYSLIB0022;SYSLIB0023;SYSLIB0041;CA1416</NoWarn>
+  </PropertyGroup>
+
+</Project>

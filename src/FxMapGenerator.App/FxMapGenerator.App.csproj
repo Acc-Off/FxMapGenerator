@@ -1,0 +1,63 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <!-- Folder / file pickers for the start screen (the browser cannot hand us a real path). -->
+    <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyName>FxMapGenerator</AssemblyName>
+    <RootNamespace>FxMapGenerator.App</RootNamespace>
+    <!-- The web page's favicon at the sizes Windows shows; made by "devtools make-icon" (Docs/development.md). -->
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <!-- Single-file publish: bundle the native Skia library into the exe. -->
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <!-- Compression is only allowed for self-contained bundles; the slim (framework-dependent) publish must not set it. -->
+    <EnableCompressionInSingleFile Condition="'$(SelfContained)' == 'true'">true</EnableCompressionInSingleFile>
+    <DebugType>embedded</DebugType>
+    <!-- Frontend (Vite) lives next door; its dist/ is embedded into the exe (see targets below). -->
+    <WebRoot>$(MSBuildThisFileDirectory)..\FxMapGenerator.Web\</WebRoot>
+    <WebDist>$(WebRoot)dist\</WebDist>
+    <!-- $(IntermediateOutputPath) is not defined yet at this point; BaseIntermediateOutputPath (obj\) is. -->
+    <WebStamp>$(BaseIntermediateOutputPath)web.stamp</WebStamp>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FxMapGenerator.Core\FxMapGenerator.Core.csproj" />
+    <ProjectReference Include="..\FxMapGenerator.GameData\FxMapGenerator.GameData.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\THIRD-PARTY-NOTICES.md" LogicalName="THIRD-PARTY-NOTICES.md" />
+    <!-- The capture resource, written out by the app into the server's resources (or as a zip): capture/<path>.
+         WithCulture false: a name such as README.ja.md would otherwise be taken for a Japanese resource and go into a
+         satellite assembly, out of the resource the app hands out. -->
+    <EmbeddedResource Include="..\..\resource\fxmapgen-capture\**\*" LogicalName="capture/%(RecursiveDir)%(Filename)%(Extension)" WithCulture="false" />
+    <InternalsVisibleTo Include="FxMapGenerator.App.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_WebInputs Include="$(WebRoot)src\**\*;$(WebRoot)public\**\*;$(WebRoot)scripts\**\*;$(WebRoot)index.html;$(WebRoot)package.json;$(WebRoot)package-lock.json;$(WebRoot)vite.config.ts;$(WebRoot)tsconfig.json" />
+  </ItemGroup>
+
+  <!-- npm ci && npm run build, only when a frontend source changed. Set SkipWebBuild=true to build without Node. -->
+  <Target Name="BuildWeb" BeforeTargets="BeforeBuild" Inputs="@(_WebInputs)" Outputs="$(WebStamp)" Condition="'$(SkipWebBuild)' != 'true'">
+    <Exec Command="npm ci --no-audit --no-fund" WorkingDirectory="$(WebRoot)" Condition="!Exists('$(WebRoot)node_modules')" />
+    <Exec Command="npm run build" WorkingDirectory="$(WebRoot)" />
+    <Touch Files="$(WebStamp)" AlwaysCreate="true" />
+  </Target>
+
+  <!-- Embed dist/** as wwwroot/<relative path>. Added inside a target so files produced by BuildWeb are picked up. -->
+  <Target Name="EmbedWeb" BeforeTargets="BeforeBuild" DependsOnTargets="BuildWeb" AfterTargets="BuildWeb">
+    <ItemGroup>
+      <_WebDistFiles Include="$(WebDist)**\*" />
+      <EmbeddedResource Include="@(_WebDistFiles)" LogicalName="wwwroot/%(RecursiveDir)%(Filename)%(Extension)" />
+    </ItemGroup>
+    <Warning Text="Frontend dist not found at $(WebDist); the web UI will not be served." Condition="'@(_WebDistFiles)' == ''" />
+  </Target>
+
+</Project>

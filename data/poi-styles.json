@@ -1,0 +1,11 @@
+{
+  "format": 1,
+  "styles": [
+    { "id": "highway-marker", "name": { "en": "Highway One marker", "ja": "Highway One マーカー" }, "look": "text", "color": "#e02020", "size": 65, "weight": "bold",
+      "outline": "#ffffff", "outlineWidth": 5, "badgeColor": "#d42a2a" },
+    { "id": "colored-dot", "name": { "en": "Colored dot", "ja": "色付きの丸" }, "look": "dot", "color": "#ff0000", "size": 58.7, "weight": "bold",
+      "outline": "#ffffff", "outlineWidth": 2, "badgeColor": null },
+    { "id": "facility", "name": { "en": "Facility name", "ja": "施設名" }, "look": "text", "color": "#202020", "size": 12, "weight": "normal",
+      "outline": "#ffffff", "outlineWidth": 3, "badgeColor": null }
+  ]
+}

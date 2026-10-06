@@ -1,0 +1,81 @@
+name: Release
+
+# Pushing a tag such as v0.1.0 builds the single-file executables, runs the tests and publishes a GitHub release with the
+# executables. The FiveM resource is inside the executables (the app writes it into the server's resources, or hands it
+# out as a zip). The tag must match <Version> in Directory.Build.props (and the resource's fxmanifest.lua version, which a
+# test checks).
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  resource:
+    # The FiveM resource: the Lua syntax, and its tests in a fake game.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Lua 5.4
+        run: sudo apt-get update && sudo apt-get install -y lua5.4
+
+      - name: Check the syntax
+        run: luac5.4 -p $(find resource -name '*.lua')
+
+      - name: Test in the fake game
+        run: lua5.4 tests/resource/run-tests.lua
+
+  release:
+    needs: resource
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: src/FxMapGenerator.Web/package-lock.json
+
+      - name: Check that the tag matches the project version
+        run: |
+          $tag = "${{ github.ref_name }}".TrimStart("v")
+          $version = (Select-Xml -Path Directory.Build.props -XPath "//Version").Node.InnerText
+          if ($tag -ne $version) { throw "Tag v$tag does not match <Version>$version</Version> in Directory.Build.props" }
+          Add-Content -Path $env:GITHUB_ENV -Value "VERSION=$version"
+
+      # -m:1 runs the test projects one after the other (see build.yml).
+      - name: Build and test
+        run: |
+          dotnet build FxMapGenerator.slnx -c Release
+          dotnet test FxMapGenerator.slnx -c Release --no-build -m:1
+
+      - name: Publish (self-contained, single file)
+        run: dotnet publish src/FxMapGenerator.App -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -o out/self-contained
+
+      - name: Publish (slim, framework-dependent)
+        run: dotnet publish src/FxMapGenerator.App -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true -o out/slim
+
+      - name: Collect release assets
+        run: |
+          New-Item -ItemType Directory dist | Out-Null
+          Copy-Item out/self-contained/FxMapGenerator.exe "dist/FxMapGenerator-$env:VERSION-win-x64.exe"
+          Copy-Item out/slim/FxMapGenerator.exe "dist/FxMapGenerator-$env:VERSION-win-x64-slim.exe"
+          $sums = Get-ChildItem dist -File | ForEach-Object { "$((Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLower())  $($_.Name)" }
+          [IO.File]::WriteAllText("$PWD/dist/SHA256SUMS.txt", ($sums -join "`n") + "`n")   # LF, so sha256sum -c accepts it
+          Get-ChildItem dist | Format-Table Name, Length
+
+      - name: Create the GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ github.ref_name }}" (Get-ChildItem dist/*).FullName `
+            --title "FxMapGenerator $env:VERSION" `
+            --notes-file .github/release-notes.md

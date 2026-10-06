@@ -1,0 +1,18 @@
+bin/
+obj/
+out/
+.vs/
+*.user
+
+# frontend build output and dependencies
+node_modules/
+src/FxMapGenerator.Web/dist/
+
+# locally generated test fixtures (may contain data taken from the game)
+tests/fixtures/
+
+# key material must never be committed
+*.dat
+
+# Claude Code local settings (machine-specific)
+.claude/settings.local.json

@@ -1,0 +1,6 @@
+{
+  "about": "Server preset for Qbox: the resources stopped on the game client while the capture environment is on, and started again after it. They draw on the screen (qbx_hud, chat) or set the weather and the clock (Renewed-Weathersync) or the traffic and NPC density (qbx_density) every frame, which the capture resource does itself meanwhile. A project can replace the list with its own (server.stopResources in the project file), for example to add a server's own HUD resources.",
+  "id": "qbox",
+  "name": "Qbox",
+  "stopResources": ["qbx_hud", "chat", "Renewed-Weathersync", "qbx_density"]
+}

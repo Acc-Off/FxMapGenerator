@@ -1,0 +1,233 @@
+{
+ "about": "Surface material classes: every material name of materials.json belongs to at most one class; a name not listed is \"other\", hash 0 is \"none\", a hash without a name is \"unknown\". The order of the classes is their index.",
+ "classes": {
+  "none": {
+   "label": "no hit",
+   "materials": []
+  },
+  "unknown": {
+   "label": "unknown hash",
+   "materials": []
+  },
+  "tarmac": {
+   "label": "tarmac (road surface)",
+   "materials": [
+    "TARMAC",
+    "TARMAC_PAINTED",
+    "TARMAC_POTHOLE",
+    "RUMBLE_STRIP",
+    "ICE_TARMAC",
+    "SNOW_TARMAC",
+    "STUNT_RAMP_SURFACE",
+    "STUNT_ROAD_SURFACE"
+   ]
+  },
+  "concrete": {
+   "label": "concrete / paving (urban ground)",
+   "materials": [
+    "CONCRETE",
+    "CONCRETE_POTHOLE",
+    "CONCRETE_DUSTY",
+    "PAVING_SLAB",
+    "BREEZE_BLOCK",
+    "BRICK",
+    "MARBLE",
+    "COBBLESTONE",
+    "PLASTER_SOLID",
+    "PLASTER_BRITTLE",
+    "CERAMIC",
+    "ROOF_TILE",
+    "ROOF_FELT",
+    "TILE",
+    "LINOLEUM",
+    "LAMINATE",
+    "CARPET_SOLID",
+    "CARPET_BRITTLE",
+    "CARPET_HOLLOW",
+    "LEAVES_HOLLOW",
+    "CONCRETE_PAVEMENT"
+   ]
+  },
+  "rock": {
+   "label": "rock / stone",
+   "materials": [
+    "ROCK",
+    "ROCK_MOSSY",
+    "STONE",
+    "GRAVEL_LARGE",
+    "SLATE",
+    "ROCK_NOINST",
+    "SANDSTONE_SOLID",
+    "SANDSTONE_BRITTLE"
+   ]
+  },
+  "grass": {
+   "label": "grass",
+   "materials": [
+    "GRASS",
+    "GRASS_LONG",
+    "GRASS_SHORT",
+    "HAY"
+   ]
+  },
+  "dirt": {
+   "label": "dirt / soil / mud / clay",
+   "materials": [
+    "DIRT_TRACK",
+    "SOIL",
+    "CLAY_HARD",
+    "CLAY_SOFT",
+    "MUD_HARD",
+    "MUD_POTHOLE",
+    "MUD_SOFT",
+    "MUD_UNDERWATER",
+    "MUD_DEEP",
+    "MARSH",
+    "MARSH_DEEP",
+    "GRAVEL_SMALL",
+    "GRAVEL_DEEP",
+    "GRAVEL_TRAIN_TRACK",
+    "SAND_TRACK",
+    "WOODCHIPS"
+   ]
+  },
+  "sand": {
+   "label": "sand (dry)",
+   "materials": [
+    "SAND_LOOSE",
+    "SAND_COMPACT",
+    "SAND_DRY_DEEP"
+   ]
+  },
+  "sand_wet": {
+   "label": "sand (wet / underwater)",
+   "materials": [
+    "SAND_WET",
+    "SAND_WET_DEEP",
+    "SAND_UNDERWATER"
+   ]
+  },
+  "vegetation": {
+   "label": "tree / bush",
+   "materials": [
+    "TREE_BARK",
+    "BUSHES",
+    "TWIGS",
+    "LEAVES",
+    "FOLIAGE"
+   ]
+  },
+  "snow": {
+   "label": "snow / ice",
+   "materials": [
+    "ICE",
+    "SNOW_LOOSE",
+    "SNOW_COMPACT",
+    "SNOW_DEEP"
+   ]
+  },
+  "water": {
+   "label": "water material",
+   "materials": [
+    "WATER",
+    "WATER_SHALLOW",
+    "WATER_DEEP",
+    "WATER_RIVER",
+    "PUDDLE"
+   ]
+  },
+  "wood": {
+   "label": "wood",
+   "materials": [
+    "WOOD_SOLID_SMALL",
+    "WOOD_SOLID_MEDIUM",
+    "WOOD_SOLID_LARGE",
+    "WOOD_SOLID_POLISHED",
+    "WOOD_FLOOR_DUSTY",
+    "WOOD_HOLLOW_SMALL",
+    "WOOD_HOLLOW_MEDIUM",
+    "WOOD_HOLLOW_LARGE",
+    "WOOD_CHIPBOARD",
+    "WOOD_OLD_CREAKY",
+    "WOOD_HIGH_DENSITY",
+    "WOOD_LATTICE",
+    "WOOD_STAIRS"
+   ]
+  },
+  "metal": {
+   "label": "metal",
+   "materials": [
+    "METAL_SOLID_SMALL",
+    "METAL_SOLID_MEDIUM",
+    "METAL_SOLID_LARGE",
+    "METAL_HOLLOW_SMALL",
+    "METAL_HOLLOW_MEDIUM",
+    "METAL_HOLLOW_LARGE",
+    "METAL_CHAINLINK_SMALL",
+    "METAL_CHAINLINK_LARGE",
+    "METAL_CORRUGATED_IRON",
+    "METAL_GRILLE",
+    "METAL_RAILING",
+    "METAL_DUCT",
+    "METAL_GARAGE_DOOR",
+    "METAL_MANHOLE",
+    "METAL_SOLID_ROAD_SURFACE",
+    "GRATING",
+    "METAL_HOLLOW_ROAD_SURFACE"
+   ]
+  },
+  "glass": {
+   "label": "glass / perspex",
+   "materials": [
+    "GLASS_SHOOT_THROUGH",
+    "GLASS_BULLETPROOF",
+    "GLASS_OPAQUE",
+    "PERSPEX"
+   ]
+  },
+  "default": {
+   "label": "DEFAULT / generic",
+   "materials": [
+    "DEFAULT",
+    "PHYS_NO_FRICTION",
+    "PHYS_GOLF_BALL",
+    "PHYS_TENNIS_BALL",
+    "PHYS_CASTER",
+    "PHYS_CASTER_RUSTY",
+    "PHYS_CAR_VOID",
+    "PHYS_PED_CAPSULE",
+    "PHYS_ELECTRIC_FENCE",
+    "PHYS_ELECTRIC_METAL",
+    "PHYS_BARBED_WIRE",
+    "PHYS_POOLTABLE_SURFACE",
+    "PHYS_POOLTABLE_CUSHION",
+    "PHYS_POOLTABLE_BALL",
+    "PHYS_DYNAMIC_COVER_BOUND",
+    "PHYS_MACHINERY",
+    "PHYS_VEHICLE_SPEED_UP",
+    "PHYS_VEHICLE_SLOW_DOWN",
+    "PHYS_VEHICLE_REFILL",
+    "PHYS_STUNT_TARGET_A",
+    "PHYS_STUNT_TARGET_B",
+    "PHYS_STUNT_TARGET_C",
+    "PHYS_STUNT_TARGET_D",
+    "PHYS_STUNT_TARGET_E",
+    "PHYS_STUNT_TARGET_F",
+    "PHYS_STUNT_TARGET_G",
+    "PHYS_STUNT_TARGET_H",
+    "PHYS_STUNT_TARGET_I",
+    "PHYS_STUNT_TARGET_J",
+    "PHYS_STUNT_TARGET_K",
+    "PHYS_STUNT_TARGET_L",
+    "PHYS_STUNT_TARGET_M",
+    "PHYS_STUNT_TARGET_N",
+    "PHYS_STUNT_TARGET_O",
+    "PHYS_STUNT_TARGET_P"
+   ]
+  },
+  "other": {
+   "label": "other (plastic, rubber, fabric, ...)",
+   "materials": []
+  }
+ }
+}

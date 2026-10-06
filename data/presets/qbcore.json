@@ -1,0 +1,6 @@
+{
+  "about": "Server preset for QBCore: the resources stopped on the game client while the capture environment is on, and started again after it. They draw on the screen (qb-hud, chat) or set the weather and the clock (qb-weathersync) or the traffic and NPC density (qb-smallresources, among its small features) every frame, which the capture resource does itself meanwhile. A project can replace the list with its own (server.stopResources in the project file).",
+  "id": "qbcore",
+  "name": "QBCore",
+  "stopResources": ["qb-hud", "chat", "qb-weathersync", "qb-smallresources"]
+}

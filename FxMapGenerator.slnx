@@ -1,0 +1,18 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/FxMapGenerator.Core/FxMapGenerator.Core.csproj" />
+    <Project Path="src/FxMapGenerator.GameData/FxMapGenerator.GameData.csproj" />
+    <Project Path="src/FxMapGenerator.App/FxMapGenerator.App.csproj" />
+  </Folder>
+  <Folder Name="/tools/">
+    <Project Path="tools/FxMapGenerator.DevTools/FxMapGenerator.DevTools.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/FxMapGenerator.Core.Tests/FxMapGenerator.Core.Tests.csproj" />
+    <Project Path="tests/FxMapGenerator.App.Tests/FxMapGenerator.App.Tests.csproj" />
+  </Folder>
+  <Folder Name="/third_party/">
+    <Project Path="third_party/gta-toolkit/RageLib/RageLib.csproj" />
+    <Project Path="third_party/gta-toolkit/RageLib.GTA5/RageLib.GTA5.csproj" />
+  </Folder>
+</Solution>

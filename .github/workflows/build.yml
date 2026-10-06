@@ -1,0 +1,59 @@
+name: Build
+
+# Builds the solution (frontend included, with the hover-help check) and runs the tests, which need neither GTA V nor FiveM.
+# The FiveM resource is checked in its own job with Lua 5.4.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: src/FxMapGenerator.Web/package-lock.json
+
+      - name: Build
+        run: dotnet build FxMapGenerator.slnx -c Release
+
+      # -m:1 runs the test projects one after the other: side by side, the heavy tests of one keep the other waiting on a
+      # runner with two processors, and its requests run into their timeout.
+      - name: Test
+        run: dotnet test FxMapGenerator.slnx -c Release --no-build -m:1 --logger "console;verbosity=normal"
+
+      - name: Publish (self-contained, single file)
+        run: dotnet publish src/FxMapGenerator.App -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:SkipWebBuild=true -o out/publish
+
+      - name: Check the executable (loads the bundled native libraries)
+        run: out/publish/FxMapGenerator.exe --version
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FxMapGenerator-win-x64
+          path: out/publish/FxMapGenerator.exe
+
+  resource:
+    # The FiveM resource: the Lua syntax, and its tests in a fake game (tests/resource/run-tests.lua).
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Lua 5.4
+        run: sudo apt-get update && sudo apt-get install -y lua5.4
+
+      - name: Check the syntax
+        run: luac5.4 -p $(find resource -name '*.lua')
+
+      - name: Test in the fake game
+        run: lua5.4 tests/resource/run-tests.lua

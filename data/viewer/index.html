@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>__TITLE__</title>
+<link rel="stylesheet" href="leaflet/leaflet.css">
+<style>
+  html, body { height: 100%; margin: 0; font: 14px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  #map { position: absolute; inset: 0; background: #0b1b24; }
+  .box { position: absolute; z-index: 1000; background: rgba(255, 255, 255, 0.94); color: #1c2328; border-radius: 6px;
+         padding: 6px 10px; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35); }
+  #maps { top: 10px; right: 10px; }
+  #maps label { display: block; cursor: pointer; white-space: nowrap; }
+  #where { bottom: 10px; left: 10px; font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<div id="maps" class="box" hidden></div>
+<div id="where" class="box">x — y —</div>
+<script src="leaflet/leaflet.js"></script>
+<script>
+// Written by FxMapGenerator. The tiles are read relative to this page (tiles/<map>/{z}/{x}/{y}.png), so the folder
+// can be opened from the disk or put on any static web host as it is.
+const CONFIG = /*CONFIG*/null;
+
+// The map frame in game metres (x east, y north): x -4140..4860, y 8400..-5100. A z8 tile is 70.3125 m (256 px),
+// the same grid as the loaf-scripts tiles; Leaflet's lat is the game's y, lng its x.
+const TILE = 70.3125, LEFT = -4140, TOP = 8400, RIGHT = 4860, BOTTOM = -5100;
+const crs = L.extend({}, L.CRS.Simple, { transformation: new L.Transformation(1 / TILE, -LEFT / TILE, -1 / TILE, TOP / TILE) });
+const world = L.latLngBounds([BOTTOM, LEFT], [TOP, RIGHT]);
+const map = L.map("map", { crs, minZoom: 0, maxZoom: 10, zoomSnap: 0.5, maxBounds: world.pad(0.25), maxBoundsViscosity: 0.8 });
+map.attributionControl.setPrefix('<a href="https://leafletjs.com">Leaflet</a>');
+map.fitBounds(world);
+
+const layers = {};
+let current = null;
+function show(id) {
+  const m = CONFIG.maps.find((x) => x.id === id) || CONFIG.maps[0];
+  if (current) map.removeLayer(current);
+  current = layers[m.id] ||= L.tileLayer("tiles/" + m.id + "/{z}/{x}/{y}.png", {
+    tileSize: 256, minNativeZoom: 0, maxNativeZoom: m.maxZoom, maxZoom: 10, noWrap: true, bounds: world,
+    attribution: CONFIG.credit,
+  });
+  current.addTo(map);
+  document.getElementById("map").style.background = m.background;
+  try { localStorage.setItem("fxmapgen-map", m.id); } catch (e) { /* file:// may refuse */ }
+}
+
+if (CONFIG.maps.length > 1) {
+  const box = document.getElementById("maps");
+  box.hidden = false;
+  for (const m of CONFIG.maps) {
+    const label = document.createElement("label");
+    const input = document.createElement("input");
+    input.type = "radio";
+    input.name = "map";
+    input.value = m.id;
+    input.addEventListener("change", () => show(m.id));
+    label.append(input, " " + m.title);
+    box.append(label);
+  }
+}
+let first = CONFIG.maps[0].id;
+try { first = localStorage.getItem("fxmapgen-map") || first; } catch (e) { /* ignore */ }
+show(first);
+const shown = CONFIG.maps.find((m) => layers[m.id] === current).id;
+for (const input of document.querySelectorAll("#maps input")) input.checked = input.value === shown;
+
+map.on("mousemove", (e) => {
+  document.getElementById("where").textContent = `x ${e.latlng.lng.toFixed(1)}   y ${e.latlng.lat.toFixed(1)}`;
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "format": 1,
+  "name": { "en": "Colored dots", "ja": "色付きの丸" },
+  "credit": "The coloured dots stand where the postal code map by Virus_City has them: https://forum.cfx.re/t/release-postal-code-map-minimap-new-improved-v1-3/147458",
+  "order": 1,
+  "style": "colored-dot",
+  "locked": true,
+  "points": [
+    { "id": "1", "x": 1460.83, "y": -1053.37, "color": "#ff0000", "size": 57.3 },
+    { "id": "2", "x": 2055.56, "y": -640.28, "color": "#f000ff", "size": 58.7 },
+    { "id": "3", "x": 2533.1, "y": 770.36, "color": "#f6ff00", "size": 58.7 },
+    { "id": "4", "x": 2055.56, "y": 1466.16, "color": "#24ff00", "size": 58.7 },
+    { "id": "5", "x": 2509.66, "y": -14.79, "color": "#006cff", "size": 58.7 }
+  ]
+}

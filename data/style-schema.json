@@ -1,0 +1,2050 @@
+{
+  "format": 1,
+  "groups": [
+    {
+      "id": "general",
+      "name": { "en": "General", "ja": "全体" },
+      "items": [
+        {
+          "key": "background",
+          "name": { "en": "Background color", "ja": "背景の色" },
+          "description": {
+            "en": "The color under the map, seen where no ground or water covers it. The open sea outside the range takes the deepest depth band's color instead.",
+            "ja": "地図の下地の色です。地面や水で覆われない所に見えます。範囲の外の海は、この色ではなく、水深の帯の最も深い色で塗ります。"
+          },
+          "control": "color",
+          "rebuilds": ["cells"]
+        },
+        {
+          "key": "credit",
+          "name": { "en": "Credit", "ja": "クレジット" },
+          "description": {
+            "en": "A line put into the credits of the exported maps, such as where the look comes from. Empty: none. Changing it draws nothing again.",
+            "ja": "書き出した地図のクレジットに入れる文です（見た目の出どころなど）。空欄のときは入れません。変更しても、地図は描き直しません。"
+          },
+          "control": "text",
+          "rebuilds": []
+        }
+      ]
+    },
+    {
+      "id": "ground",
+      "name": { "en": "Ground", "ja": "地面" },
+      "items": [
+        {
+          "key": "groundPaints.none",
+          "heading": { "en": "Paint of each kind of ground", "ja": "地面の種類ごとの塗り" },
+          "name": { "en": "Ground without a material", "ja": "材質のない所の塗り" },
+          "description": {
+            "en": "The color the ground is painted with where the scan found no material. Kinds of ground given the same color are painted as one.",
+            "ja": "採取で材質の当たりがなかった地面を塗る色です。同じ色を選んだ種類は、1 つにまとめて塗ります。"
+          },
+          "control": "choice",
+          "choices": [
+            { "value": "ground", "name": { "en": "Base ground", "ja": "基本の地面" } },
+            { "value": "grass", "name": { "en": "Grass", "ja": "草地" } },
+            { "value": "dirt", "name": { "en": "Dirt", "ja": "土" } },
+            { "value": "rock", "name": { "en": "Rock", "ja": "岩" } },
+            { "value": "sand", "name": { "en": "Sand", "ja": "砂地" } },
+            { "value": "beach", "name": { "en": "Beach", "ja": "砂浜" } },
+            { "value": "snow", "name": { "en": "Snow", "ja": "雪" } },
+            { "value": "water", "name": { "en": "Water", "ja": "水" } }
+          ],
+          "when": { "key": "groundRaster.mode", "equals": "blend" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundPaints.urban",
+          "name": { "en": "Urban ground", "ja": "市街地の塗り" },
+          "description": {
+            "en": "The color of the ground scanned as a hard surface (paving, concrete and the like). Kinds of ground given the same color are painted as one.",
+            "ja": "採取で舗装・コンクリートなどの硬い面と判定した地面を塗る色です。同じ色を選んだ種類は、1 つにまとめて塗ります。"
+          },
+          "control": "choice",
+          "choices": [
+            { "value": "ground", "name": { "en": "Base ground", "ja": "基本の地面" } },
+            { "value": "grass", "name": { "en": "Grass", "ja": "草地" } },
+            { "value": "dirt", "name": { "en": "Dirt", "ja": "土" } },
+            { "value": "rock", "name": { "en": "Rock", "ja": "岩" } },
+            { "value": "sand", "name": { "en": "Sand", "ja": "砂地" } },
+            { "value": "beach", "name": { "en": "Beach", "ja": "砂浜" } },
+            { "value": "snow", "name": { "en": "Snow", "ja": "雪" } },
+            { "value": "water", "name": { "en": "Water", "ja": "水" } }
+          ],
+          "when": { "key": "groundRaster.mode", "equals": "blend" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundPaints.defaultMaterial",
+          "name": { "en": "DEFAULT material ground", "ja": "材質 DEFAULT の塗り" },
+          "description": {
+            "en": "The color of the ground whose material is DEFAULT: terrain, rocks and props the game gives no material of their own. Kinds of ground given the same color are painted as one.",
+            "ja": "材質が DEFAULT の地面（ゲームが固有の材質を付けていない地形・岩・小物など）を塗る色です。同じ色を選んだ種類は、1 つにまとめて塗ります。"
+          },
+          "control": "choice",
+          "choices": [
+            { "value": "ground", "name": { "en": "Base ground", "ja": "基本の地面" } },
+            { "value": "grass", "name": { "en": "Grass", "ja": "草地" } },
+            { "value": "dirt", "name": { "en": "Dirt", "ja": "土" } },
+            { "value": "rock", "name": { "en": "Rock", "ja": "岩" } },
+            { "value": "sand", "name": { "en": "Sand", "ja": "砂地" } },
+            { "value": "beach", "name": { "en": "Beach", "ja": "砂浜" } },
+            { "value": "snow", "name": { "en": "Snow", "ja": "雪" } },
+            { "value": "water", "name": { "en": "Water", "ja": "水" } }
+          ],
+          "when": { "key": "groundRaster.mode", "equals": "blend" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundPaints.grass",
+          "name": { "en": "Grass ground", "ja": "草地の塗り" },
+          "description": {
+            "en": "The color of the ground scanned as grass. Kinds of ground given the same color are painted as one.",
+            "ja": "採取で草地と判定した地面を塗る色です。同じ色を選んだ種類は、1 つにまとめて塗ります。"
+          },
+          "control": "choice",
+          "choices": [
+            { "value": "ground", "name": { "en": "Base ground", "ja": "基本の地面" } },
+            { "value": "grass", "name": { "en": "Grass", "ja": "草地" } },
+            { "value": "dirt", "name": { "en": "Dirt", "ja": "土" } },
+            { "value": "rock", "name": { "en": "Rock", "ja": "岩" } },
+            { "value": "sand", "name": { "en": "Sand", "ja": "砂地" } },
+            { "value": "beach", "name": { "en": "Beach", "ja": "砂浜" } },
+            { "value": "snow", "name": { "en": "Snow", "ja": "雪" } },
+            { "value": "water", "name": { "en": "Water", "ja": "水" } }
+          ],
+          "when": { "key": "groundRaster.mode", "equals": "blend" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundPaints.dirt",
+          "name": { "en": "Dirt ground", "ja": "土の塗り" },
+          "description": {
+            "en": "The color of the ground scanned as dirt. Kinds of ground given the same color are painted as one.",
+            "ja": "採取で土と判定した地面を塗る色です。同じ色を選んだ種類は、1 つにまとめて塗ります。"
+          },
+          "control": "choice",
+          "choices": [
+            { "value": "ground", "name": { "en": "Base ground", "ja": "基本の地面" } },
+            { "value": "grass", "name": { "en": "Grass", "ja": "草地" } },
+            { "value": "dirt", "name": { "en": "Dirt", "ja": "土" } },
+            { "value": "rock", "name": { "en": "Rock", "ja": "岩" } },
+            { "value": "sand", "name": { "en": "Sand", "ja": "砂地" } },
+            { "value": "beach", "name": { "en": "Beach", "ja": "砂浜" } },
+            { "value": "snow", "name": { "en": "Snow", "ja": "雪" } },
+            { "value": "water", "name": { "en": "Water", "ja": "水" } }
+          ],
+          "when": { "key": "groundRaster.mode", "equals": "blend" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundPaints.sand",
+          "name": { "en": "Sand ground", "ja": "砂地の塗り" },
+          "description": {
+            "en": "The color of the ground scanned as dry sand. Kinds of ground given the same color are painted as one.",
+            "ja": "採取で乾いた砂と判定した地面を塗る色です。同じ色を選んだ種類は、1 つにまとめて塗ります。"
+          },
+          "control": "choice",
+          "choices": [
+            { "value": "ground", "name": { "en": "Base ground", "ja": "基本の地面" } },
+            { "value": "grass", "name": { "en": "Grass", "ja": "草地" } },
+            { "value": "dirt", "name": { "en": "Dirt", "ja": "土" } },
+            { "value": "rock", "name": { "en": "Rock", "ja": "岩" } },
+            { "value": "sand", "name": { "en": "Sand", "ja": "砂地" } },
+            { "value": "beach", "name": { "en": "Beach", "ja": "砂浜" } },
+            { "value": "snow", "name": { "en": "Snow", "ja": "雪" } },
+            { "value": "water", "name": { "en": "Water", "ja": "水" } }
+          ],
+          "when": { "key": "groundRaster.mode", "equals": "blend" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundPaints.beach",
+          "name": { "en": "Beach and wet sand ground", "ja": "浜・濡れた砂の塗り" },
+          "description": {
+            "en": "The color of the ground scanned as wet sand, as on beaches. Kinds of ground given the same color are painted as one.",
+            "ja": "採取で濡れた砂（浜など）と判定した地面を塗る色です。同じ色を選んだ種類は、1 つにまとめて塗ります。"
+          },
+          "control": "choice",
+          "choices": [
+            { "value": "ground", "name": { "en": "Base ground", "ja": "基本の地面" } },
+            { "value": "grass", "name": { "en": "Grass", "ja": "草地" } },
+            { "value": "dirt", "name": { "en": "Dirt", "ja": "土" } },
+            { "value": "rock", "name": { "en": "Rock", "ja": "岩" } },
+            { "value": "sand", "name": { "en": "Sand", "ja": "砂地" } },
+            { "value": "beach", "name": { "en": "Beach", "ja": "砂浜" } },
+            { "value": "snow", "name": { "en": "Snow", "ja": "雪" } },
+            { "value": "water", "name": { "en": "Water", "ja": "水" } }
+          ],
+          "when": { "key": "groundRaster.mode", "equals": "blend" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundPaints.rock",
+          "name": { "en": "Rock ground", "ja": "岩の塗り" },
+          "description": {
+            "en": "The color of the ground scanned as rock. Kinds of ground given the same color are painted as one.",
+            "ja": "採取で岩と判定した地面を塗る色です。同じ色を選んだ種類は、1 つにまとめて塗ります。"
+          },
+          "control": "choice",
+          "choices": [
+            { "value": "ground", "name": { "en": "Base ground", "ja": "基本の地面" } },
+            { "value": "grass", "name": { "en": "Grass", "ja": "草地" } },
+            { "value": "dirt", "name": { "en": "Dirt", "ja": "土" } },
+            { "value": "rock", "name": { "en": "Rock", "ja": "岩" } },
+            { "value": "sand", "name": { "en": "Sand", "ja": "砂地" } },
+            { "value": "beach", "name": { "en": "Beach", "ja": "砂浜" } },
+            { "value": "snow", "name": { "en": "Snow", "ja": "雪" } },
+            { "value": "water", "name": { "en": "Water", "ja": "水" } }
+          ],
+          "when": { "key": "groundRaster.mode", "equals": "blend" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundPaints.vegetation",
+          "name": { "en": "Vegetation ground", "ja": "植生の塗り" },
+          "description": {
+            "en": "The color of the ground scanned as vegetation (undergrowth, the ground under trees). Kinds of ground given the same color are painted as one.",
+            "ja": "採取で植生（茂み、木の下の地面など）と判定した地面を塗る色です。同じ色を選んだ種類は、1 つにまとめて塗ります。"
+          },
+          "control": "choice",
+          "choices": [
+            { "value": "ground", "name": { "en": "Base ground", "ja": "基本の地面" } },
+            { "value": "grass", "name": { "en": "Grass", "ja": "草地" } },
+            { "value": "dirt", "name": { "en": "Dirt", "ja": "土" } },
+            { "value": "rock", "name": { "en": "Rock", "ja": "岩" } },
+            { "value": "sand", "name": { "en": "Sand", "ja": "砂地" } },
+            { "value": "beach", "name": { "en": "Beach", "ja": "砂浜" } },
+            { "value": "snow", "name": { "en": "Snow", "ja": "雪" } },
+            { "value": "water", "name": { "en": "Water", "ja": "水" } }
+          ],
+          "when": { "key": "groundRaster.mode", "equals": "blend" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundPaints.snow",
+          "name": { "en": "Snow ground", "ja": "雪の塗り" },
+          "description": {
+            "en": "The color of the ground scanned as snow. Kinds of ground given the same color are painted as one.",
+            "ja": "採取で雪と判定した地面を塗る色です。同じ色を選んだ種類は、1 つにまとめて塗ります。"
+          },
+          "control": "choice",
+          "choices": [
+            { "value": "ground", "name": { "en": "Base ground", "ja": "基本の地面" } },
+            { "value": "grass", "name": { "en": "Grass", "ja": "草地" } },
+            { "value": "dirt", "name": { "en": "Dirt", "ja": "土" } },
+            { "value": "rock", "name": { "en": "Rock", "ja": "岩" } },
+            { "value": "sand", "name": { "en": "Sand", "ja": "砂地" } },
+            { "value": "beach", "name": { "en": "Beach", "ja": "砂浜" } },
+            { "value": "snow", "name": { "en": "Snow", "ja": "雪" } },
+            { "value": "water", "name": { "en": "Water", "ja": "水" } }
+          ],
+          "when": { "key": "groundRaster.mode", "equals": "blend" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundPaints.waterMaterial",
+          "name": { "en": "Water material ground", "ja": "水の材質の塗り" },
+          "description": {
+            "en": "The color of the ground whose material is water where no water surface was scanned. Kinds of ground given the same color are painted as one.",
+            "ja": "水面は採取していないが、材質が水の地面を塗る色です。同じ色を選んだ種類は、1 つにまとめて塗ります。"
+          },
+          "control": "choice",
+          "choices": [
+            { "value": "ground", "name": { "en": "Base ground", "ja": "基本の地面" } },
+            { "value": "grass", "name": { "en": "Grass", "ja": "草地" } },
+            { "value": "dirt", "name": { "en": "Dirt", "ja": "土" } },
+            { "value": "rock", "name": { "en": "Rock", "ja": "岩" } },
+            { "value": "sand", "name": { "en": "Sand", "ja": "砂地" } },
+            { "value": "beach", "name": { "en": "Beach", "ja": "砂浜" } },
+            { "value": "snow", "name": { "en": "Snow", "ja": "雪" } },
+            { "value": "water", "name": { "en": "Water", "ja": "水" } }
+          ],
+          "when": { "key": "groundRaster.mode", "equals": "blend" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "paint.ground.ground",
+          "heading": { "en": "Ground colors", "ja": "地面の色" },
+          "name": { "en": "Base ground color", "ja": "基本の地面の色" },
+          "description": {
+            "en": "The color of the kinds of ground painted as \"Base ground\".",
+            "ja": "塗りに「基本の地面」を選んだ種類の地面の色です。"
+          },
+          "control": "color",
+          "when": { "key": "groundRaster.mode", "equals": "blend" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "paint.ground.grass",
+          "name": { "en": "Grass color", "ja": "草地の色" },
+          "description": {
+            "en": "The color of the kinds of ground painted as \"Grass\".",
+            "ja": "塗りに「草地」を選んだ種類の地面の色です。"
+          },
+          "control": "color",
+          "when": { "key": "groundRaster.mode", "equals": "blend" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "paint.ground.dirt",
+          "name": { "en": "Dirt color", "ja": "土の色" },
+          "description": {
+            "en": "The color of the kinds of ground painted as \"Dirt\".",
+            "ja": "塗りに「土」を選んだ種類の地面の色です。"
+          },
+          "control": "color",
+          "when": { "key": "groundRaster.mode", "equals": "blend" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "paint.ground.rock",
+          "name": { "en": "Rock color", "ja": "岩の色" },
+          "description": {
+            "en": "The color of the kinds of ground painted as \"Rock\".",
+            "ja": "塗りに「岩」を選んだ種類の地面の色です。"
+          },
+          "control": "color",
+          "when": { "key": "groundRaster.mode", "equals": "blend" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "paint.ground.sand",
+          "name": { "en": "Sand color", "ja": "砂地の色" },
+          "description": {
+            "en": "The color of the kinds of ground painted as \"Sand\".",
+            "ja": "塗りに「砂地」を選んだ種類の地面の色です。"
+          },
+          "control": "color",
+          "when": { "key": "groundRaster.mode", "equals": "blend" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "paint.ground.beach",
+          "name": { "en": "Beach color", "ja": "砂浜の色" },
+          "description": {
+            "en": "The color of the kinds of ground painted as \"Beach\".",
+            "ja": "塗りに「砂浜」を選んだ種類の地面の色です。"
+          },
+          "control": "color",
+          "when": { "key": "groundRaster.mode", "equals": "blend" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "paint.ground.snow",
+          "name": { "en": "Snow color", "ja": "雪の色" },
+          "description": {
+            "en": "The color of the kinds of ground painted as \"Snow\".",
+            "ja": "塗りに「雪」を選んだ種類の地面の色です。"
+          },
+          "control": "color",
+          "when": { "key": "groundRaster.mode", "equals": "blend" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundRaster.natural",
+          "heading": { "en": "Blending of the natural ground", "ja": "自然の地面のなじませ方" },
+          "name": { "en": "Kinds of ground blended", "ja": "なじませる地面の種類" },
+          "description": {
+            "en": "The kinds of ground blended into each other in the way chosen below. The others (such as urban ground) keep sharp edges.",
+            "ja": "下のなじませ方で、互いに混ぜる地面の種類です。選ばなかった種類（市街地など）は、境目をくっきりのまま塗ります。"
+          },
+          "control": "checks",
+          "choices": [
+            { "value": "none", "name": { "en": "No material", "ja": "材質なし" } },
+            { "value": "urban", "name": { "en": "Urban", "ja": "市街地" } },
+            { "value": "defaultMaterial", "name": { "en": "DEFAULT material", "ja": "材質 DEFAULT" } },
+            { "value": "grass", "name": { "en": "Grass", "ja": "草地" } },
+            { "value": "dirt", "name": { "en": "Dirt", "ja": "土" } },
+            { "value": "sand", "name": { "en": "Sand", "ja": "砂地" } },
+            { "value": "beach", "name": { "en": "Beach, wet sand", "ja": "浜・濡れた砂" } },
+            { "value": "rock", "name": { "en": "Rock", "ja": "岩" } },
+            { "value": "vegetation", "name": { "en": "Vegetation", "ja": "植生" } },
+            { "value": "snow", "name": { "en": "Snow", "ja": "雪" } }
+          ],
+          "when": { "key": "groundRaster.mode", "equals": "blend" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundRaster.method",
+          "name": { "en": "Blending", "ja": "なじませ方" },
+          "description": {
+            "en": "How the natural ground is blended. None: each kind in its color. Blur: the edges blurred. Tidy small patches: small patches take the color around them, then the edges are blurred. Keep detail: part of the unblurred colors brought back into the blur. Brush: evened out as if painted with a brush, then the edges blurred. Each way keeps its own values, so switching keeps what was set.",
+            "ja": "自然の地面どうしの混ぜ方です。なじませない: 種類ごとの色のまま。ぼかし: 境目をぼかします。小さな切れ端を片付け: 小さなまとまりをまわりの色にしてから、境目をぼかします。元の塗り分けを戻す: ぼかした色に、ぼかす前の色を一部戻します。油絵風: 筆で塗ったように整えてから、境目をぼかします。方法ごとに値を持つので、切り替えても調整した値は残ります。"
+          },
+          "control": "choice",
+          "choices": [
+            { "value": "none", "name": { "en": "None", "ja": "なじませない" } },
+            { "value": "blur", "name": { "en": "Blur", "ja": "ぼかし" } },
+            { "value": "patches", "name": { "en": "Tidy small patches", "ja": "小さな切れ端を片付け" } },
+            { "value": "detail", "name": { "en": "Keep detail", "ja": "元の塗り分けを戻す" } },
+            { "value": "brush", "name": { "en": "Brush", "ja": "油絵風" } }
+          ],
+          "when": { "key": "groundRaster.mode", "equals": "blend" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundRaster.blur.width",
+          "name": { "en": "Blur width", "ja": "ぼかしの幅" },
+          "description": {
+            "en": "How wide the natural ground is blurred into each other. The larger, the smoother the edges.",
+            "ja": "自然の地面どうしをぼかす幅です。大きいほど、境目がなめらかになります。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 50,
+          "step": 0.5,
+          "unit": "m",
+          "when": { "key": "groundRaster.method", "equals": "blur" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundRaster.patches.minArea",
+          "name": { "en": "Largest patch tidied", "ja": "片付ける大きさ" },
+          "description": {
+            "en": "Patches of one color smaller than this take the most common color of the natural ground around them.",
+            "ja": "同じ色のまとまりのうち、この面積より小さいものを、まわりで最も多い自然の地面の色に替えます。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 1000,
+          "step": 1,
+          "unit": "m2",
+          "when": { "key": "groundRaster.method", "equals": "patches" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundRaster.patches.edgeWidth",
+          "name": { "en": "Edge blur width", "ja": "境目のぼかしの幅" },
+          "description": {
+            "en": "How wide the edges are blurred after the small patches are tidied.",
+            "ja": "小さなまとまりを片付けた後に、境目をぼかす幅です。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 20,
+          "step": 0.5,
+          "unit": "m",
+          "when": { "key": "groundRaster.method", "equals": "patches" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundRaster.detail.width",
+          "name": { "en": "Blur width", "ja": "ぼかしの幅" },
+          "description": {
+            "en": "How wide the natural ground is blurred before part of the unblurred colors is brought back.",
+            "ja": "ぼかす前の色を一部戻す前に、自然の地面どうしをぼかす幅です。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 50,
+          "step": 0.5,
+          "unit": "m",
+          "when": { "key": "groundRaster.method", "equals": "detail" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundRaster.detail.amount",
+          "name": { "en": "Share brought back", "ja": "戻す割合" },
+          "description": {
+            "en": "How much of the difference to the unblurred colors is brought back: 0 is the blur alone, 1 the colors before the blur.",
+            "ja": "ぼかした色に、ぼかす前の色との差を戻す割合です。0 でぼかしのまま、1 でぼかす前の色です。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 1,
+          "step": 0.05,
+          "when": { "key": "groundRaster.method", "equals": "detail" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundRaster.brush.radius",
+          "name": { "en": "Brush size", "ja": "筆の大きさ" },
+          "description": {
+            "en": "The size of the brush. The larger, the more the fine patches merge into larger areas.",
+            "ja": "筆の大きさです。大きいほど、細かな塗り分けが大きなまとまりになります。"
+          },
+          "control": "number",
+          "min": 1,
+          "max": 10,
+          "step": 1,
+          "unit": "m",
+          "when": { "key": "groundRaster.method", "equals": "brush" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundRaster.brush.edgeWidth",
+          "name": { "en": "Edge blur width", "ja": "境目のぼかしの幅" },
+          "description": {
+            "en": "How wide the edges are blurred after the brush.",
+            "ja": "筆で整えた後に、境目をぼかす幅です。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 20,
+          "step": 0.5,
+          "unit": "m",
+          "when": { "key": "groundRaster.method", "equals": "brush" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundRaster.toneBlur",
+          "heading": { "en": "Material tones over the region colors", "ja": "地域の色に重ねる材質の濃淡" },
+          "name": { "en": "Tone blur", "ja": "濃淡のぼかし" },
+          "description": {
+            "en": "How wide the share of each material is blurred before it tints the region colors. The larger, the softer the tones.",
+            "ja": "地域の色に重ねる前に、材質の割合をぼかす幅です。大きいほど、濃淡の境目がやわらかくなります。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 20,
+          "step": 0.5,
+          "unit": "m",
+          "when": { "key": "groundRaster.mode", "equals": "regions" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundRaster.tones.paved.color",
+          "name": { "en": "Paving color", "ja": "舗装の色" },
+          "description": {
+            "en": "The color the region color is moved toward on urban ground (paving, concrete) and on ground of the DEFAULT material.",
+            "ja": "市街地（舗装・コンクリート）と材質 DEFAULT の所で、地域の色を寄せる色です。"
+          },
+          "control": "color",
+          "when": { "key": "groundRaster.mode", "equals": "regions" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundRaster.tones.paved.strength",
+          "name": { "en": "Paving strength", "ja": "舗装の強さ" },
+          "description": {
+            "en": "How far the region color is moved toward the paving color on urban ground and on ground of the DEFAULT material: 0 keeps the region color, 1 is the paving color.",
+            "ja": "市街地と材質 DEFAULT の所で、地域の色を舗装の色に寄せる割合です。0 で地域の色のまま、1 で舗装の色です。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 1,
+          "step": 0.05,
+          "when": { "key": "groundRaster.mode", "equals": "regions" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundRaster.tones.dirt.color",
+          "name": { "en": "Dirt color", "ja": "土の色" },
+          "description": {
+            "en": "The color the region color is moved toward on dirt.",
+            "ja": "土の所で、地域の色を寄せる色です。"
+          },
+          "control": "color",
+          "when": { "key": "groundRaster.mode", "equals": "regions" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundRaster.tones.dirt.strength",
+          "name": { "en": "Dirt strength", "ja": "土の強さ" },
+          "description": {
+            "en": "How far the region color is moved toward the dirt color on dirt: 0 keeps the region color, 1 is the dirt color.",
+            "ja": "土の所で、地域の色を土の色に寄せる割合です。0 で地域の色のまま、1 で土の色です。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 1,
+          "step": 0.05,
+          "when": { "key": "groundRaster.mode", "equals": "regions" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundRaster.tones.sand.color",
+          "name": { "en": "Sand color", "ja": "砂の色" },
+          "description": {
+            "en": "The color the region color is moved toward on sand and wet sand.",
+            "ja": "砂地・濡れた砂の所で、地域の色を寄せる色です。"
+          },
+          "control": "color",
+          "when": { "key": "groundRaster.mode", "equals": "regions" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundRaster.tones.sand.strength",
+          "name": { "en": "Sand strength", "ja": "砂の強さ" },
+          "description": {
+            "en": "How far the region color is moved toward the sand color on sand: 0 keeps the region color, 1 is the sand color.",
+            "ja": "砂の所で、地域の色を砂の色に寄せる割合です。0 で地域の色のまま、1 で砂の色です。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 1,
+          "step": 0.05,
+          "when": { "key": "groundRaster.mode", "equals": "regions" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundRaster.tones.rock.color",
+          "name": { "en": "Rock color", "ja": "岩の色" },
+          "description": {
+            "en": "The color the region color is moved toward on rock.",
+            "ja": "岩の所で、地域の色を寄せる色です。"
+          },
+          "control": "color",
+          "when": { "key": "groundRaster.mode", "equals": "regions" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundRaster.tones.rock.strength",
+          "name": { "en": "Rock strength", "ja": "岩の強さ" },
+          "description": {
+            "en": "How far the region color is moved toward the rock color on rock: 0 keeps the region color, 1 is the rock color.",
+            "ja": "岩の所で、地域の色を岩の色に寄せる割合です。0 で地域の色のまま、1 で岩の色です。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 1,
+          "step": 0.05,
+          "when": { "key": "groundRaster.mode", "equals": "regions" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundRaster.tones.snow.color",
+          "name": { "en": "Snow color", "ja": "雪の色" },
+          "description": {
+            "en": "The color the region color is moved toward on snow.",
+            "ja": "雪の所で、地域の色を寄せる色です。"
+          },
+          "control": "color",
+          "when": { "key": "groundRaster.mode", "equals": "regions" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundRaster.tones.snow.strength",
+          "name": { "en": "Snow strength", "ja": "雪の強さ" },
+          "description": {
+            "en": "How far the region color is moved toward the snow color on snow: 0 keeps the region color, 1 is the snow color.",
+            "ja": "雪の所で、地域の色を雪の色に寄せる割合です。0 で地域の色のまま、1 で雪の色です。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 1,
+          "step": 0.05,
+          "when": { "key": "groundRaster.mode", "equals": "regions" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "groundRaster.treeDarkening",
+          "name": { "en": "Darkening under trees", "ja": "木の暗さ" },
+          "description": {
+            "en": "The ground's brightness where there is vegetation is multiplied by this: 1 does not darken it.",
+            "ja": "植生の所の地面の明るさに掛ける値です。1 で暗くしません。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 1,
+          "step": 0.05,
+          "when": { "key": "groundRaster.mode", "equals": "regions" },
+          "rebuilds": ["cells", "cells.prep"]
+        }
+      ]
+    },
+    {
+      "id": "regions",
+      "name": { "en": "Region colors", "ja": "地域の色" },
+      "items": [
+        {
+          "key": "regions.colors.city",
+          "name": { "en": "City color", "ja": "市街の色" },
+          "description": {
+            "en": "The ground color of the zones given the region \"City\" (the table per zone). Where regions meet, the colors are blurred into each other.",
+            "ja": "地区ごとの割り当てで地域を「市街」にした地区の、地面の色です。地域の境目は、隣の地域の色とぼかして混ぜます。"
+          },
+          "control": "color",
+          "when": { "key": "groundRaster.mode", "equals": "regions" },
+          "rebuilds": ["cells", "cells.prep", "mapData.regions"]
+        },
+        {
+          "key": "regions.colors.lowland",
+          "name": { "en": "Lowland color", "ja": "低地の色" },
+          "description": {
+            "en": "The ground color of the zones given the region \"Lowland\" (the table per zone). Where regions meet, the colors are blurred into each other.",
+            "ja": "地区ごとの割り当てで地域を「低地」にした地区の、地面の色です。地域の境目は、隣の地域の色とぼかして混ぜます。"
+          },
+          "control": "color",
+          "when": { "key": "groundRaster.mode", "equals": "regions" },
+          "rebuilds": ["cells", "cells.prep", "mapData.regions"]
+        },
+        {
+          "key": "regions.colors.hills",
+          "name": { "en": "Hills color", "ja": "丘の色" },
+          "description": {
+            "en": "The ground color of the zones given the region \"Hills\" (the table per zone). Where regions meet, the colors are blurred into each other.",
+            "ja": "地区ごとの割り当てで地域を「丘」にした地区の、地面の色です。地域の境目は、隣の地域の色とぼかして混ぜます。"
+          },
+          "control": "color",
+          "when": { "key": "groundRaster.mode", "equals": "regions" },
+          "rebuilds": ["cells", "cells.prep", "mapData.regions"]
+        },
+        {
+          "key": "regions.colors.mountain",
+          "name": { "en": "Mountain color", "ja": "山の色" },
+          "description": {
+            "en": "The ground color of the zones given the region \"Mountain\" (the table per zone). Where regions meet, the colors are blurred into each other.",
+            "ja": "地区ごとの割り当てで地域を「山」にした地区の、地面の色です。地域の境目は、隣の地域の色とぼかして混ぜます。"
+          },
+          "control": "color",
+          "when": { "key": "groundRaster.mode", "equals": "regions" },
+          "rebuilds": ["cells", "cells.prep", "mapData.regions"]
+        },
+        {
+          "key": "regions.colors.coast",
+          "name": { "en": "Coast color", "ja": "海岸の色" },
+          "description": {
+            "en": "The ground color of the zones given the region \"Coast\" (the table per zone). Where regions meet, the colors are blurred into each other.",
+            "ja": "地区ごとの割り当てで地域を「海岸」にした地区の、地面の色です。地域の境目は、隣の地域の色とぼかして混ぜます。"
+          },
+          "control": "color",
+          "when": { "key": "groundRaster.mode", "equals": "regions" },
+          "rebuilds": ["cells", "cells.prep", "mapData.regions"]
+        },
+        {
+          "key": "regions.colors.waste",
+          "name": { "en": "Wasteland color", "ja": "荒れ地の色" },
+          "description": {
+            "en": "The ground color of the zones given the region \"Wasteland\" (the table per zone). Where regions meet, the colors are blurred into each other.",
+            "ja": "地区ごとの割り当てで地域を「荒れ地」にした地区の、地面の色です。地域の境目は、隣の地域の色とぼかして混ぜます。"
+          },
+          "control": "color",
+          "when": { "key": "groundRaster.mode", "equals": "regions" },
+          "rebuilds": ["cells", "cells.prep", "mapData.regions"]
+        },
+        {
+          "key": "regions.blur",
+          "name": { "en": "Blur between regions", "ja": "地域の境目のぼかし" },
+          "description": {
+            "en": "How wide the region colors are blurred where regions meet. The larger, the more gradually one region's color turns into the next.",
+            "ja": "地域の色の境目をぼかす幅です。大きいほど、地域の色がなだらかに変わります。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 500,
+          "step": 10,
+          "unit": "m",
+          "when": { "key": "groundRaster.mode", "equals": "regions" },
+          "rebuilds": ["cells", "cells.prep", "mapData.regions"]
+        },
+        {
+          "key": "regions.sea",
+          "name": { "en": "Region out at sea", "ja": "沖の地域" },
+          "description": {
+            "en": "The region used where no land is near (out at sea, small islands far from the coast).",
+            "ja": "近くに陸のない所（沖、岸から離れた小島など）に使う地域です。"
+          },
+          "control": "choice",
+          "choices": [
+            { "value": "city", "name": { "en": "City", "ja": "市街" } },
+            { "value": "lowland", "name": { "en": "Lowland", "ja": "低地" } },
+            { "value": "hills", "name": { "en": "Hills", "ja": "丘" } },
+            { "value": "mountain", "name": { "en": "Mountain", "ja": "山" } },
+            { "value": "coast", "name": { "en": "Coast", "ja": "海岸" } },
+            { "value": "waste", "name": { "en": "Wasteland", "ja": "荒れ地" } }
+          ],
+          "when": { "key": "groundRaster.mode", "equals": "regions" },
+          "rebuilds": ["cells", "cells.prep", "mapData.regions"]
+        }
+      ]
+    },
+    {
+      "id": "shade",
+      "name": { "en": "Hill shading", "ja": "陰影" },
+      "items": [
+        {
+          "key": "shade.strength",
+          "name": { "en": "Shading strength", "ja": "陰影の強さ" },
+          "description": {
+            "en": "How strong the hill shading is: 0 is none; the larger, the stronger the light and shadow on slopes.",
+            "ja": "陰影の強さです。0 で陰影なし、大きいほど斜面の明暗が強くなります。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 2,
+          "step": 0.05,
+          "rebuilds": ["cells"]
+        },
+        {
+          "key": "shade.blur",
+          "name": { "en": "Height blur", "ja": "高さのぼかし" },
+          "description": {
+            "en": "How wide the heights are blurred before they are shaded. The larger, the more small bumps disappear and only the larger landforms stay.",
+            "ja": "陰影を付ける前に、高さをぼかす幅です。大きいほど、細かな起伏が消えて、大きな地形だけが残ります。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 30,
+          "step": 0.5,
+          "unit": "m",
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "shade.altitude",
+          "name": { "en": "Light altitude", "ja": "光の高さ" },
+          "description": {
+            "en": "The height of the lights above the horizon. The lower, the sharper the light and shadow on slopes.",
+            "ja": "地平線からの光の高さ（角度）です。低いほど、斜面の明暗がはっきりします。"
+          },
+          "control": "number",
+          "min": 5,
+          "max": 90,
+          "step": 1,
+          "unit": "deg",
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "shade.lights",
+          "name": { "en": "Lights", "ja": "光" },
+          "description": {
+            "en": "The lights the slopes are lit from: the direction each comes from (north 0°, east 90°) and its weight. The brightness of the lights is mixed by their weights.",
+            "ja": "斜面を照らす光です。光ごとに、来る方位（北が 0°、東が 90°）と重みを決めます。光ごとの明るさを、重みで混ぜます。"
+          },
+          "control": "table",
+          "columns": [
+            {
+              "id": "azimuth",
+              "name": { "en": "Direction", "ja": "方位" },
+              "description": {
+                "en": "The direction the light comes from: north 0°, east 90°, south 180°, west 270°.",
+                "ja": "光の来る方位です。北が 0°、東が 90°、南が 180°、西が 270° です。"
+              },
+              "control": "number",
+              "min": 0,
+              "max": 359,
+              "step": 1,
+              "unit": "deg",
+              "rebuilds": ["cells", "cells.prep"]
+            },
+            {
+              "id": "weight",
+              "name": { "en": "Weight", "ja": "重み" },
+              "description": {
+                "en": "How much this light counts when the lights are mixed.",
+                "ja": "光を混ぜるときの、この光の割合です。"
+              },
+              "control": "number",
+              "min": 0,
+              "max": 1,
+              "step": 0.05,
+              "rebuilds": ["cells", "cells.prep"]
+            }
+          ],
+          "rebuilds": ["cells", "cells.prep"]
+        }
+      ]
+    },
+    {
+      "id": "water",
+      "name": { "en": "Water", "ja": "水" },
+      "items": [
+        {
+          "key": "paint.water",
+          "name": { "en": "Water color", "ja": "水の色" },
+          "description": {
+            "en": "The color of water where no depth band is painted over it. The ground's picture also paints the ground whose material is water with it.",
+            "ja": "水深の帯を塗らない水面の色です。地面の画像でも、材質が水の地面をこの色で塗ります。"
+          },
+          "control": "color",
+          "when": { "key": "groundRaster.mode", "equals": "blend" },
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "paint.water",
+          "name": { "en": "Water color", "ja": "水の色" },
+          "description": {
+            "en": "The color of water where no depth band is painted over it.",
+            "ja": "水深の帯を塗らない水面の色です。"
+          },
+          "control": "color",
+          "when": { "key": "groundRaster.mode", "equals": "regions" },
+          "rebuilds": ["cells"]
+        },
+        {
+          "key": "paint.waterOpacity",
+          "name": { "en": "Water opacity", "ja": "水の不透明度" },
+          "description": {
+            "en": "How opaque the water is where no depth band is painted over it: 100 % covers what lies behind the map, 0 % lets it show through (the in-game map shows the game behind it; the radar, the small whole map laid under the sheets).",
+            "ja": "水深の帯を塗らない水面の不透明度です。100 % で後ろを隠し、0 % で透明になります（ゲーム内の ESC の地図では後ろのゲーム画面が、レーダーではミニマップの下に敷く全体図が見えます）。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 1,
+          "step": 0.01,
+          "unit": "percent",
+          "rebuilds": ["cells"]
+        },
+        {
+          "key": "sea.bands",
+          "name": { "en": "Depth bands", "ja": "水深の帯" },
+          "description": {
+            "en": "The water is painted in bands of depth, each band in one color over a sand bed and one over a rock bed, shallow bands first. A band reaches from the depth of the band before it to its own depth; the last one goes on down.",
+            "ja": "水を深さの帯に分けて塗ります。帯ごとに、砂の底の色と岩の底の色を決めます（浅い帯から）。帯は、1 つ前の帯の深さから、その帯の深さまでです。最後の帯は、それより深い所すべてです。"
+          },
+          "control": "table",
+          "columns": [
+            {
+              "id": "depth",
+              "name": { "en": "Depth", "ja": "深さ" },
+              "description": {
+                "en": "Where the band ends (the water's depth). Each band is deeper than the one before.",
+                "ja": "帯の終わりの水深です。帯は浅い方から、深さの増える順に並べます。"
+              },
+              "control": "number",
+              "min": 0.05,
+              "max": 500,
+              "step": 0.05,
+              "unit": "m",
+              "rebuilds": ["cells", "cells.prep"]
+            },
+            {
+              "id": "sand",
+              "name": { "en": "Sand bed", "ja": "砂の底" },
+              "description": {
+                "en": "The band's color where the bed is not rock.",
+                "ja": "水の底が岩でない所の、帯の色です。"
+              },
+              "control": "color",
+              "rebuilds": ["cells"]
+            },
+            {
+              "id": "rock",
+              "name": { "en": "Rock bed", "ja": "岩の底" },
+              "description": {
+                "en": "The band's color where the bed is rock.",
+                "ja": "水の底が岩の所の、帯の色です。"
+              },
+              "control": "color",
+              "rebuilds": ["cells"]
+            },
+            {
+              "id": "opacity",
+              "name": { "en": "Opacity", "ja": "不透明度" },
+              "description": {
+                "en": "How opaque the band is, over sand and rock alike: 100 % covers what lies behind the map, 0 % lets it show through. The open sea beyond the range takes the last band's.",
+                "ja": "帯の不透明度です（砂の底と岩の底で同じ）。100 % で後ろを隠し、0 % で透明になります。範囲の外の外洋は、最後の帯の値になります。"
+              },
+              "control": "number",
+              "min": 0,
+              "max": 1,
+              "step": 0.01,
+              "unit": "percent",
+              "rebuilds": ["cells"]
+            }
+          ],
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "sea.rockMinArea",
+          "name": { "en": "Smallest rock bed", "ja": "岩の底の最小の広さ" },
+          "description": {
+            "en": "Patches of rock bed smaller than this are painted as sand bed.",
+            "ja": "これより狭い岩の底のまとまりは、砂の底として塗ります。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 10000,
+          "step": 10,
+          "unit": "m2",
+          "rebuilds": ["cells", "cells.prep"]
+        }
+      ]
+    },
+    {
+      "id": "buildings",
+      "name": { "en": "Buildings", "ja": "建物" },
+      "items": [
+        {
+          "key": "paint.buildings.grey",
+          "heading": { "en": "Building colors", "ja": "建物の色" },
+          "name": { "en": "Grey buildings", "ja": "灰の建物の色" },
+          "description": {
+            "en": "The color of the buildings given \"Grey\".",
+            "ja": "建物の色の割り当てで「灰」にした建物の色です。"
+          },
+          "control": "color",
+          "rebuilds": ["cells"]
+        },
+        {
+          "key": "paint.buildings.greygreen",
+          "name": { "en": "Grey-green buildings", "ja": "灰緑の建物の色" },
+          "description": {
+            "en": "The color of the buildings given \"Grey-green\".",
+            "ja": "建物の色の割り当てで「灰緑」にした建物の色です。"
+          },
+          "control": "color",
+          "rebuilds": ["cells"]
+        },
+        {
+          "key": "paint.buildings.brown",
+          "name": { "en": "Brown buildings", "ja": "茶の建物の色" },
+          "description": {
+            "en": "The color of the buildings given \"Brown\".",
+            "ja": "建物の色の割り当てで「茶」にした建物の色です。"
+          },
+          "control": "color",
+          "rebuilds": ["cells"]
+        },
+        {
+          "key": "buildings.default",
+          "heading": { "en": "Which color a building takes", "ja": "建物の色の割り当て" },
+          "name": { "en": "Buildings without a rule", "ja": "決まりのない建物" },
+          "description": {
+            "en": "The color of a building whose zone has no building color and whose zone's region has none either. A building takes the color of the zone its middle lies in.",
+            "ja": "地区にも、その地区の地域にも建物の色の決まりのない建物の色です。建物は、その中心のある地区の決まりに従います。"
+          },
+          "control": "choice",
+          "choices": [
+            { "value": "grey", "name": { "en": "Grey", "ja": "灰" } },
+            { "value": "greygreen", "name": { "en": "Grey-green", "ja": "灰緑" } },
+            { "value": "brown", "name": { "en": "Brown", "ja": "茶" } }
+          ],
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "buildings.byRegion.city",
+          "name": { "en": "Buildings of the city", "ja": "市街の建物" },
+          "description": {
+            "en": "The color of the buildings in the zones of the region \"City\", unless the table per zone gives the zone a building color.",
+            "ja": "地域が「市街」の地区の建物の色です。地区ごとの割り当てで、地区に建物の色を決めた所は、そちらに従います。"
+          },
+          "control": "choice",
+          "choices": [
+            { "value": "grey", "name": { "en": "Grey", "ja": "灰" } },
+            { "value": "greygreen", "name": { "en": "Grey-green", "ja": "灰緑" } },
+            { "value": "brown", "name": { "en": "Brown", "ja": "茶" } }
+          ],
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "buildings.byRegion.lowland",
+          "name": { "en": "Buildings of the lowland", "ja": "低地の建物" },
+          "description": {
+            "en": "The color of the buildings in the zones of the region \"Lowland\", unless the table per zone gives the zone a building color.",
+            "ja": "地域が「低地」の地区の建物の色です。地区ごとの割り当てで、地区に建物の色を決めた所は、そちらに従います。"
+          },
+          "control": "choice",
+          "choices": [
+            { "value": "grey", "name": { "en": "Grey", "ja": "灰" } },
+            { "value": "greygreen", "name": { "en": "Grey-green", "ja": "灰緑" } },
+            { "value": "brown", "name": { "en": "Brown", "ja": "茶" } }
+          ],
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "buildings.byRegion.hills",
+          "name": { "en": "Buildings of the hills", "ja": "丘の建物" },
+          "description": {
+            "en": "The color of the buildings in the zones of the region \"Hills\", unless the table per zone gives the zone a building color.",
+            "ja": "地域が「丘」の地区の建物の色です。地区ごとの割り当てで、地区に建物の色を決めた所は、そちらに従います。"
+          },
+          "control": "choice",
+          "choices": [
+            { "value": "grey", "name": { "en": "Grey", "ja": "灰" } },
+            { "value": "greygreen", "name": { "en": "Grey-green", "ja": "灰緑" } },
+            { "value": "brown", "name": { "en": "Brown", "ja": "茶" } }
+          ],
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "buildings.byRegion.mountain",
+          "name": { "en": "Buildings of the mountains", "ja": "山の建物" },
+          "description": {
+            "en": "The color of the buildings in the zones of the region \"Mountain\", unless the table per zone gives the zone a building color.",
+            "ja": "地域が「山」の地区の建物の色です。地区ごとの割り当てで、地区に建物の色を決めた所は、そちらに従います。"
+          },
+          "control": "choice",
+          "choices": [
+            { "value": "grey", "name": { "en": "Grey", "ja": "灰" } },
+            { "value": "greygreen", "name": { "en": "Grey-green", "ja": "灰緑" } },
+            { "value": "brown", "name": { "en": "Brown", "ja": "茶" } }
+          ],
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "buildings.byRegion.coast",
+          "name": { "en": "Buildings of the coast", "ja": "海岸の建物" },
+          "description": {
+            "en": "The color of the buildings in the zones of the region \"Coast\", unless the table per zone gives the zone a building color.",
+            "ja": "地域が「海岸」の地区の建物の色です。地区ごとの割り当てで、地区に建物の色を決めた所は、そちらに従います。"
+          },
+          "control": "choice",
+          "choices": [
+            { "value": "grey", "name": { "en": "Grey", "ja": "灰" } },
+            { "value": "greygreen", "name": { "en": "Grey-green", "ja": "灰緑" } },
+            { "value": "brown", "name": { "en": "Brown", "ja": "茶" } }
+          ],
+          "rebuilds": ["cells", "cells.prep"]
+        },
+        {
+          "key": "buildings.byRegion.waste",
+          "name": { "en": "Buildings of the wasteland", "ja": "荒れ地の建物" },
+          "description": {
+            "en": "The color of the buildings in the zones of the region \"Wasteland\", unless the table per zone gives the zone a building color.",
+            "ja": "地域が「荒れ地」の地区の建物の色です。地区ごとの割り当てで、地区に建物の色を決めた所は、そちらに従います。"
+          },
+          "control": "choice",
+          "choices": [
+            { "value": "grey", "name": { "en": "Grey", "ja": "灰" } },
+            { "value": "greygreen", "name": { "en": "Grey-green", "ja": "灰緑" } },
+            { "value": "brown", "name": { "en": "Brown", "ja": "茶" } }
+          ],
+          "rebuilds": ["cells", "cells.prep"]
+        }
+      ]
+    },
+    {
+      "id": "roads",
+      "name": { "en": "Roads", "ja": "道路" },
+      "items": [
+        {
+          "key": "paint.roads.road.fill",
+          "heading": { "en": "Roads", "ja": "一般道" },
+          "name": { "en": "Road fill", "ja": "一般道の塗り" },
+          "description": {
+            "en": "The fill of the paved roads other than highways.",
+            "ja": "高速道路以外の舗装した道の、塗りの色です。"
+          },
+          "control": "color",
+          "rebuilds": ["cells"]
+        },
+        {
+          "key": "paint.roads.road.casing",
+          "name": { "en": "Road edge", "ja": "一般道の縁の色" },
+          "description": {
+            "en": "The color of the line along both edges of the paved roads other than highways.",
+            "ja": "高速道路以外の舗装した道の、両側の縁の線の色です。"
+          },
+          "control": "color",
+          "rebuilds": ["cells"]
+        },
+        {
+          "key": "paint.roads.highway.fill",
+          "heading": { "en": "Highways", "ja": "高速道路" },
+          "name": { "en": "Highway fill", "ja": "高速道路の塗り" },
+          "description": {
+            "en": "The fill of the highways.",
+            "ja": "高速道路の、塗りの色です。"
+          },
+          "control": "color",
+          "rebuilds": ["cells"]
+        },
+        {
+          "key": "paint.roads.highway.casing",
+          "name": { "en": "Highway edge", "ja": "高速道路の縁の色" },
+          "description": {
+            "en": "The color of the line along both edges of the highways.",
+            "ja": "高速道路の、両側の縁の線の色です。"
+          },
+          "control": "color",
+          "rebuilds": ["cells"]
+        },
+        {
+          "key": "paint.roads.casingWidth",
+          "name": { "en": "Edge width", "ja": "縁の幅" },
+          "description": {
+            "en": "The width of the edge lines of the roads and highways.",
+            "ja": "一般道と高速道路の、縁の線の幅です。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 5,
+          "step": 0.1,
+          "unit": "m",
+          "rebuilds": ["cells"]
+        },
+        {
+          "key": "paint.roads.track.color",
+          "heading": { "en": "Unpaved roads", "ja": "未舗装の道" },
+          "name": { "en": "Unpaved road color", "ja": "未舗装の道の色" },
+          "description": {
+            "en": "The color of the unpaved roads (roads over natural ground).",
+            "ja": "未舗装の道（自然の地面の上の道）の色です。"
+          },
+          "control": "color",
+          "rebuilds": ["cells"]
+        },
+        {
+          "key": "paint.roads.track.width",
+          "name": { "en": "Unpaved road width", "ja": "未舗装の道の幅" },
+          "description": {
+            "en": "The width the unpaved roads are drawn with, whatever the road's own width.",
+            "ja": "未舗装の道を描く線の幅です。道の幅によらず、この幅で描きます。"
+          },
+          "control": "number",
+          "min": 0.5,
+          "max": 20,
+          "step": 0.5,
+          "unit": "m",
+          "rebuilds": ["cells"]
+        },
+        {
+          "key": "paint.roads.tunnel.color",
+          "heading": { "en": "Tunnels", "ja": "トンネル" },
+          "name": { "en": "Tunnel edge", "ja": "トンネルの縁の色" },
+          "description": {
+            "en": "The color of the dashed line around the tunnels.",
+            "ja": "トンネルのまわりの破線の色です。"
+          },
+          "control": "color",
+          "rebuilds": ["cells"]
+        },
+        {
+          "key": "paint.roads.tunnel.width",
+          "name": { "en": "Tunnel edge width", "ja": "トンネルの縁の幅" },
+          "description": {
+            "en": "The width of the dashed line around the tunnels.",
+            "ja": "トンネルのまわりの破線の幅です。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 5,
+          "step": 0.1,
+          "unit": "m",
+          "rebuilds": ["cells"]
+        },
+        {
+          "key": "paint.roads.tunnel.dash.0",
+          "name": { "en": "Tunnel dash length", "ja": "トンネルの破線の長さ" },
+          "description": {
+            "en": "The length of each dash of the line around the tunnels.",
+            "ja": "トンネルのまわりの破線の、1 本の線の長さです。"
+          },
+          "control": "number",
+          "min": 0.5,
+          "max": 50,
+          "step": 0.5,
+          "unit": "m",
+          "rebuilds": ["cells"]
+        },
+        {
+          "key": "paint.roads.tunnel.dash.1",
+          "name": { "en": "Tunnel dash gap", "ja": "トンネルの破線の間隔" },
+          "description": {
+            "en": "The gap between the dashes of the line around the tunnels.",
+            "ja": "トンネルのまわりの破線の、線と線の間隔です。"
+          },
+          "control": "number",
+          "min": 0.5,
+          "max": 50,
+          "step": 0.5,
+          "unit": "m",
+          "rebuilds": ["cells"]
+        },
+        {
+          "key": "paint.roads.tunnel.fill",
+          "name": { "en": "Tunnel fill", "ja": "トンネルの中の色" },
+          "description": {
+            "en": "The color laid over the ground inside the tunnels' outline.",
+            "ja": "トンネルの形の中に、地面に重ねる色です。"
+          },
+          "control": "color",
+          "rebuilds": ["cells"]
+        },
+        {
+          "key": "paint.roads.tunnel.fillAlpha",
+          "name": { "en": "Tunnel fill opacity", "ja": "トンネルの中の濃さ" },
+          "description": {
+            "en": "How opaque the tunnel fill is: 0 % lets the ground show fully, 100 % covers it.",
+            "ja": "トンネルの中の色の濃さです。0 % で地面がそのまま見え、100 % で地面を覆います。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 1,
+          "step": 0.01,
+          "unit": "percent",
+          "rebuilds": ["cells"]
+        },
+        {
+          "key": "paint.rail",
+          "heading": { "en": "Railways", "ja": "鉄道" },
+          "name": { "en": "Railway color", "ja": "線路の色" },
+          "description": {
+            "en": "The color of the railway tracks.",
+            "ja": "線路の色です。"
+          },
+          "control": "color",
+          "rebuilds": ["cells"]
+        }
+      ]
+    },
+    {
+      "id": "labels",
+      "name": { "en": "Labels", "ja": "ラベル" },
+      "items": [
+        {
+          "key": "labels.fonts.en",
+          "heading": { "en": "Fonts and placing", "ja": "フォントと置き方" },
+          "name": { "en": "English font", "ja": "英語のフォント" },
+          "description": {
+            "en": "The font of the text of the English maps. The postal codes use it on the maps of every language.",
+            "ja": "英語の地図の文字のフォントです。番地は、どの言語の地図でもこのフォントです。"
+          },
+          "control": "font",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.fonts.ja",
+          "language": "ja",
+          "name": { "en": "Japanese font", "ja": "日本語のフォント" },
+          "description": {
+            "en": "The font of the text of the Japanese maps (the postal codes excepted).",
+            "ja": "日本語の地図の文字のフォントです（番地を除きます）。"
+          },
+          "control": "font",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.clearance",
+          "name": { "en": "Space around the text", "ja": "文字のまわりの余白" },
+          "description": {
+            "en": "The space kept free around every label placed. The larger, the further apart the labels and the fewer fit.",
+            "ja": "置いた文字のまわりに空ける幅です。大きいほど、文字どうしが離れ、置ける文字が減ります。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 20,
+          "step": 0.5,
+          "unit": "m",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.minPixels",
+          "name": { "en": "Smallest text drawn", "ja": "描く文字の最小の大きさ" },
+          "description": {
+            "en": "Text that would look smaller than this on the z8 tiles is not drawn.",
+            "ja": "z8 のタイルで、これより小さく見える文字は描きません。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 20,
+          "step": 0.5,
+          "unit": "px",
+          "rebuilds": ["cells"]
+        },
+        {
+          "key": "labels.postal.color",
+          "heading": { "en": "Postal codes", "ja": "番地" },
+          "name": { "en": "Postal code color", "ja": "番地の色" },
+          "description": {
+            "en": "The color of the postal codes.",
+            "ja": "番地の文字の色です。"
+          },
+          "control": "color",
+          "rebuilds": ["cells"]
+        },
+        {
+          "key": "labels.postal.size",
+          "name": { "en": "Postal code size", "ja": "番地の大きさ" },
+          "description": {
+            "en": "The size of the postal codes. Zones given a postal code size in the table per zone take that one.",
+            "ja": "番地の文字の大きさです。地区ごとの割り当てで番地の大きさを決めた地区では、そちらを使います。"
+          },
+          "control": "number",
+          "min": 1,
+          "max": 100,
+          "step": 0.01,
+          "unit": "m",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.zone.color",
+          "heading": { "en": "Zone names", "ja": "地区名" },
+          "name": { "en": "Zone name color", "ja": "地区名の色" },
+          "description": {
+            "en": "The color of the zone names.",
+            "ja": "地区名の文字の色です。"
+          },
+          "control": "color",
+          "rebuilds": ["cells"]
+        },
+        {
+          "key": "labels.zone.size",
+          "name": { "en": "Zone name size", "ja": "地区名の大きさ" },
+          "description": {
+            "en": "The size of the zone names. Where a name does not fit, a smaller size is tried.",
+            "ja": "地区名の文字の大きさです。入らない所では、小さくして置きます。"
+          },
+          "control": "number",
+          "min": 1,
+          "max": 100,
+          "step": 0.5,
+          "unit": "m",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.zone.spacing",
+          "name": { "en": "Zone name letter spacing", "ja": "地区名の字間" },
+          "description": {
+            "en": "The space added between the letters of the zone names.",
+            "ja": "地区名の文字と文字の間に足す間隔です。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 20,
+          "step": 0.5,
+          "unit": "m",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.zone.weight",
+          "name": { "en": "Zone name weight", "ja": "地区名の太さ" },
+          "description": {
+            "en": "Normal or bold zone names.",
+            "ja": "地区名の文字の太さです。"
+          },
+          "control": "choice",
+          "choices": [
+            { "value": "normal", "name": { "en": "Normal", "ja": "標準" } },
+            { "value": "bold", "name": { "en": "Bold", "ja": "太字" } }
+          ],
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.zone.outline",
+          "name": { "en": "Zone name outline color", "ja": "地区名の縁取りの色" },
+          "description": {
+            "en": "The color of the outline around the letters of the zone names.",
+            "ja": "地区名の文字のまわりの縁取りの色です。"
+          },
+          "control": "color",
+          "rebuilds": ["cells"]
+        },
+        {
+          "key": "labels.zone.outlineWidth",
+          "name": { "en": "Zone name outline width", "ja": "地区名の縁取りの幅" },
+          "description": {
+            "en": "The width of the outline around the letters of the zone names: 0 draws none.",
+            "ja": "地区名の文字のまわりの縁取りの幅です。0 で縁取りなしです。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 20,
+          "step": 0.5,
+          "unit": "m",
+          "rebuilds": ["cells"]
+        },
+        {
+          "key": "labels.zone.minArea",
+          "name": { "en": "Smallest zone named", "ja": "名前を置く地区の最小の広さ" },
+          "description": {
+            "en": "A zone whose largest piece is smaller than this gets no name.",
+            "ja": "地区のいちばん大きなまとまりがこれより狭い地区には、名前を置きません。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 1000000,
+          "step": 1000,
+          "unit": "m2",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.color",
+          "heading": { "en": "Street names", "ja": "通り名" },
+          "name": { "en": "Street name color", "ja": "通り名の色" },
+          "description": {
+            "en": "The color of the street names.",
+            "ja": "通り名の文字の色です。"
+          },
+          "control": "color",
+          "rebuilds": ["cells"]
+        },
+        {
+          "key": "labels.street.routeNumbers",
+          "name": { "en": "Route numbers", "ja": "路線番号" },
+          "description": {
+            "en": "Adds the route number to the names of the streets of a numbered route (for example \"Great Ocean Hwy // Route 1\"; the routes the app carries).",
+            "ja": "番号のある路線の通りの名前に、路線番号を添えます（例: 「Great Ocean Hwy // Route 1」。アプリに同梱の路線の表の通りだけです）。"
+          },
+          "control": "check",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.expand",
+          "name": { "en": "Short forms written out", "ja": "略語の書き戻し" },
+          "description": {
+            "en": "Short forms in the English street names written out in full, word by word in the table's order (for example Blvd as Boulevard).",
+            "ja": "英語の通り名の略語を、元の語に書き戻します。単語ごとに、表の順に当てます（例: Blvd を Boulevard に）。"
+          },
+          "control": "table",
+          "columns": [
+            {
+              "id": "short",
+              "name": { "en": "Short form", "ja": "略語" },
+              "description": {
+                "en": "The short form as the game's street names have it.",
+                "ja": "ゲームの通り名にある略語です。"
+              },
+              "control": "text",
+              "rebuilds": ["cells", "mapData.labels"]
+            },
+            {
+              "id": "long",
+              "name": { "en": "Written out", "ja": "書き戻す語" },
+              "description": {
+                "en": "The word the short form is written out as.",
+                "ja": "略語を書き戻す語です。"
+              },
+              "control": "text",
+              "rebuilds": ["cells", "mapData.labels"]
+            }
+          ],
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.highway.size",
+          "heading": { "en": "Street names: highways", "ja": "通り名: 高速道路" },
+          "name": { "en": "Size", "ja": "文字の大きさ" },
+          "description": {
+            "en": "The size of the names of the highways. Where a name does not fit, a smaller size is tried.",
+            "ja": "高速道路の名前の文字の大きさです。入らない所では、小さくして置きます。"
+          },
+          "control": "number",
+          "min": 1,
+          "max": 100,
+          "step": 0.5,
+          "unit": "m",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.highway.weight",
+          "name": { "en": "Weight", "ja": "文字の太さ" },
+          "description": {
+            "en": "Normal or bold names of the highways.",
+            "ja": "高速道路の名前の文字の太さです。"
+          },
+          "control": "choice",
+          "choices": [
+            { "value": "normal", "name": { "en": "Normal", "ja": "標準" } },
+            { "value": "bold", "name": { "en": "Bold", "ja": "太字" } }
+          ],
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.highway.repeat",
+          "name": { "en": "One name per", "ja": "名前の間隔" },
+          "description": {
+            "en": "A highway gets one name per this length of its line (a shorter line one name).",
+            "ja": "高速道路の線の長さのうち、この長さごとに名前を 1 つ置きます（短い線にも 1 つ）。"
+          },
+          "control": "number",
+          "min": 50,
+          "max": 5000,
+          "step": 10,
+          "unit": "m",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.highway.sameNameGap",
+          "name": { "en": "Least gap between the same name", "ja": "同じ名前の最小の間隔" },
+          "description": {
+            "en": "Two labels of the same highway name are never placed closer than this.",
+            "ja": "同じ名前の高速道路の名前どうしを、この距離より近くには置きません。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 10000,
+          "step": 10,
+          "unit": "m",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.highway.maxGlyphTurn",
+          "name": { "en": "Largest turn between letters", "ja": "文字の間の曲がりの限度" },
+          "description": {
+            "en": "How far the line may turn between two letters of a highway name. No name is put where the line turns more sharply.",
+            "ja": "高速道路の名前の文字と文字の間で、線が曲がってよい角度です。それより急に曲がる所には、名前を置きません。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 90,
+          "step": 1,
+          "unit": "deg",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.highway.letterSpacing",
+          "name": { "en": "Letter spacing", "ja": "字間" },
+          "description": {
+            "en": "The space added after each letter of a highway name, as a share of the text size.",
+            "ja": "高速道路の名前の文字の後ろに足す間隔です（文字の大きさに対する割合）。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 1,
+          "step": 0.01,
+          "unit": "em",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.major.size",
+          "heading": { "en": "Street names: major roads", "ja": "通り名: 幹線道路" },
+          "name": { "en": "Size", "ja": "文字の大きさ" },
+          "description": {
+            "en": "The size of the names of the major roads. Where a name does not fit, a smaller size is tried.",
+            "ja": "幹線道路の名前の文字の大きさです。入らない所では、小さくして置きます。"
+          },
+          "control": "number",
+          "min": 1,
+          "max": 100,
+          "step": 0.5,
+          "unit": "m",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.major.weight",
+          "name": { "en": "Weight", "ja": "文字の太さ" },
+          "description": {
+            "en": "Normal or bold names of the major roads.",
+            "ja": "幹線道路の名前の文字の太さです。"
+          },
+          "control": "choice",
+          "choices": [
+            { "value": "normal", "name": { "en": "Normal", "ja": "標準" } },
+            { "value": "bold", "name": { "en": "Bold", "ja": "太字" } }
+          ],
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.major.repeat",
+          "name": { "en": "One name per", "ja": "名前の間隔" },
+          "description": {
+            "en": "A major road gets one name per this length of its line (a shorter line one name).",
+            "ja": "幹線道路の線の長さのうち、この長さごとに名前を 1 つ置きます（短い線にも 1 つ）。"
+          },
+          "control": "number",
+          "min": 50,
+          "max": 5000,
+          "step": 10,
+          "unit": "m",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.major.sameNameGap",
+          "name": { "en": "Least gap between the same name", "ja": "同じ名前の最小の間隔" },
+          "description": {
+            "en": "Two labels of the same major road name are never placed closer than this.",
+            "ja": "同じ名前の幹線道路の名前どうしを、この距離より近くには置きません。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 10000,
+          "step": 10,
+          "unit": "m",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.major.maxGlyphTurn",
+          "name": { "en": "Largest turn between letters", "ja": "文字の間の曲がりの限度" },
+          "description": {
+            "en": "How far the line may turn between two letters of a major road name. No name is put where the line turns more sharply.",
+            "ja": "幹線道路の名前の文字と文字の間で、線が曲がってよい角度です。それより急に曲がる所には、名前を置きません。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 90,
+          "step": 1,
+          "unit": "deg",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.major.letterSpacing",
+          "name": { "en": "Letter spacing", "ja": "字間" },
+          "description": {
+            "en": "The space added after each letter of a major road name, as a share of the text size.",
+            "ja": "幹線道路の名前の文字の後ろに足す間隔です（文字の大きさに対する割合）。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 1,
+          "step": 0.01,
+          "unit": "em",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.street.size",
+          "heading": { "en": "Street names: streets", "ja": "通り名: 一般道" },
+          "name": { "en": "Size", "ja": "文字の大きさ" },
+          "description": {
+            "en": "The size of the names of the streets. Where a name does not fit, a smaller size is tried.",
+            "ja": "一般道の名前の文字の大きさです。入らない所では、小さくして置きます。"
+          },
+          "control": "number",
+          "min": 1,
+          "max": 100,
+          "step": 0.5,
+          "unit": "m",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.street.weight",
+          "name": { "en": "Weight", "ja": "文字の太さ" },
+          "description": {
+            "en": "Normal or bold names of the streets.",
+            "ja": "一般道の名前の文字の太さです。"
+          },
+          "control": "choice",
+          "choices": [
+            { "value": "normal", "name": { "en": "Normal", "ja": "標準" } },
+            { "value": "bold", "name": { "en": "Bold", "ja": "太字" } }
+          ],
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.street.repeat",
+          "name": { "en": "One name per", "ja": "名前の間隔" },
+          "description": {
+            "en": "A street gets one name per this length of its line (a shorter line one name).",
+            "ja": "一般道の線の長さのうち、この長さごとに名前を 1 つ置きます（短い線にも 1 つ）。"
+          },
+          "control": "number",
+          "min": 50,
+          "max": 5000,
+          "step": 10,
+          "unit": "m",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.street.sameNameGap",
+          "name": { "en": "Least gap between the same name", "ja": "同じ名前の最小の間隔" },
+          "description": {
+            "en": "Two labels of the same street name are never placed closer than this.",
+            "ja": "同じ名前の一般道の名前どうしを、この距離より近くには置きません。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 10000,
+          "step": 10,
+          "unit": "m",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.street.maxGlyphTurn",
+          "name": { "en": "Largest turn between letters", "ja": "文字の間の曲がりの限度" },
+          "description": {
+            "en": "How far the line may turn between two letters of a street name. No name is put where the line turns more sharply.",
+            "ja": "一般道の名前の文字と文字の間で、線が曲がってよい角度です。それより急に曲がる所には、名前を置きません。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 90,
+          "step": 1,
+          "unit": "deg",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.street.letterSpacing",
+          "name": { "en": "Letter spacing", "ja": "字間" },
+          "description": {
+            "en": "The space added after each letter of a street name, as a share of the text size.",
+            "ja": "一般道の名前の文字の後ろに足す間隔です（文字の大きさに対する割合）。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 1,
+          "step": 0.01,
+          "unit": "em",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.minor.size",
+          "heading": { "en": "Street names: minor roads", "ja": "通り名: 細い道" },
+          "name": { "en": "Size", "ja": "文字の大きさ" },
+          "description": {
+            "en": "The size of the names of the minor roads (narrow roads without regular traffic). Where a name does not fit, a smaller size is tried.",
+            "ja": "細い道（普段の交通が走らない狭い道）の名前の文字の大きさです。入らない所では、小さくして置きます。"
+          },
+          "control": "number",
+          "min": 1,
+          "max": 100,
+          "step": 0.5,
+          "unit": "m",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.minor.weight",
+          "name": { "en": "Weight", "ja": "文字の太さ" },
+          "description": {
+            "en": "Normal or bold names of the minor roads.",
+            "ja": "細い道の名前の文字の太さです。"
+          },
+          "control": "choice",
+          "choices": [
+            { "value": "normal", "name": { "en": "Normal", "ja": "標準" } },
+            { "value": "bold", "name": { "en": "Bold", "ja": "太字" } }
+          ],
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.minor.repeat",
+          "name": { "en": "One name per", "ja": "名前の間隔" },
+          "description": {
+            "en": "A minor road gets one name per this length of its line (a shorter line one name).",
+            "ja": "細い道の線の長さのうち、この長さごとに名前を 1 つ置きます（短い線にも 1 つ）。"
+          },
+          "control": "number",
+          "min": 50,
+          "max": 5000,
+          "step": 10,
+          "unit": "m",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.minor.sameNameGap",
+          "name": { "en": "Least gap between the same name", "ja": "同じ名前の最小の間隔" },
+          "description": {
+            "en": "Two labels of the same minor road name are never placed closer than this.",
+            "ja": "同じ名前の細い道の名前どうしを、この距離より近くには置きません。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 10000,
+          "step": 10,
+          "unit": "m",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.minor.maxGlyphTurn",
+          "name": { "en": "Largest turn between letters", "ja": "文字の間の曲がりの限度" },
+          "description": {
+            "en": "How far the line may turn between two letters of a minor road name. No name is put where the line turns more sharply.",
+            "ja": "細い道の名前の文字と文字の間で、線が曲がってよい角度です。それより急に曲がる所には、名前を置きません。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 90,
+          "step": 1,
+          "unit": "deg",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.minor.letterSpacing",
+          "name": { "en": "Letter spacing", "ja": "字間" },
+          "description": {
+            "en": "The space added after each letter of a minor road name, as a share of the text size.",
+            "ja": "細い道の名前の文字の後ろに足す間隔です（文字の大きさに対する割合）。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 1,
+          "step": 0.01,
+          "unit": "em",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.track.size",
+          "heading": { "en": "Street names: unpaved roads", "ja": "通り名: 未舗装の道" },
+          "name": { "en": "Size", "ja": "文字の大きさ" },
+          "description": {
+            "en": "The size of the names of the unpaved roads. Where a name does not fit, a smaller size is tried.",
+            "ja": "未舗装の道の名前の文字の大きさです。入らない所では、小さくして置きます。"
+          },
+          "control": "number",
+          "min": 1,
+          "max": 100,
+          "step": 0.5,
+          "unit": "m",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.track.weight",
+          "name": { "en": "Weight", "ja": "文字の太さ" },
+          "description": {
+            "en": "Normal or bold names of the unpaved roads.",
+            "ja": "未舗装の道の名前の文字の太さです。"
+          },
+          "control": "choice",
+          "choices": [
+            { "value": "normal", "name": { "en": "Normal", "ja": "標準" } },
+            { "value": "bold", "name": { "en": "Bold", "ja": "太字" } }
+          ],
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.track.repeat",
+          "name": { "en": "One name per", "ja": "名前の間隔" },
+          "description": {
+            "en": "An unpaved road gets one name per this length of its line (a shorter line one name).",
+            "ja": "未舗装の道の線の長さのうち、この長さごとに名前を 1 つ置きます（短い線にも 1 つ）。"
+          },
+          "control": "number",
+          "min": 50,
+          "max": 5000,
+          "step": 10,
+          "unit": "m",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.track.sameNameGap",
+          "name": { "en": "Least gap between the same name", "ja": "同じ名前の最小の間隔" },
+          "description": {
+            "en": "Two labels of the same unpaved road name are never placed closer than this.",
+            "ja": "同じ名前の未舗装の道の名前どうしを、この距離より近くには置きません。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 10000,
+          "step": 10,
+          "unit": "m",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.track.maxGlyphTurn",
+          "name": { "en": "Largest turn between letters", "ja": "文字の間の曲がりの限度" },
+          "description": {
+            "en": "How far the line may turn between two letters of an unpaved road name. No name is put where the line turns more sharply.",
+            "ja": "未舗装の道の名前の文字と文字の間で、線が曲がってよい角度です。それより急に曲がる所には、名前を置きません。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 90,
+          "step": 1,
+          "unit": "deg",
+          "rebuilds": ["cells", "mapData.labels"]
+        },
+        {
+          "key": "labels.street.classes.track.letterSpacing",
+          "name": { "en": "Letter spacing", "ja": "字間" },
+          "description": {
+            "en": "The space added after each letter of an unpaved road name, as a share of the text size.",
+            "ja": "未舗装の道の名前の文字の後ろに足す間隔です（文字の大きさに対する割合）。"
+          },
+          "control": "number",
+          "min": 0,
+          "max": 1,
+          "step": 0.01,
+          "unit": "em",
+          "rebuilds": ["cells", "mapData.labels"]
+        }
+      ]
+    },
+    {
+      "id": "zones",
+      "name": { "en": "Per zone", "ja": "地区ごとの割り当て" },
+      "items": [
+        {
+          "key": "regions.zones",
+          "name": { "en": "Table per zone", "ja": "地区ごとの割り当て" },
+          "description": {
+            "en": "Per game zone: its region (which decides its buildings' color when the zone has none of its own), its buildings' color and the size of its postal codes. Empty: the general rule.",
+            "ja": "ゲームの地区ごとに、地域（建物の色を決めていない地区は、地域の建物の色になります）、建物の色、番地の大きさを決めます。空欄のときは、全体の決まりに従います。"
+          },
+          "control": "table",
+          "columns": [
+            {
+              "id": "region",
+              "name": { "en": "Region", "ja": "地域" },
+              "description": {
+                "en": "The zone's region. A zone without one takes the region of the nearest zone that has one.",
+                "ja": "地区の地域です。地域のない地区は、いちばん近い、地域のある地区の地域になります。"
+              },
+              "control": "choice",
+              "choices": [
+                { "value": "city", "name": { "en": "City", "ja": "市街" } },
+                { "value": "lowland", "name": { "en": "Lowland", "ja": "低地" } },
+                { "value": "hills", "name": { "en": "Hills", "ja": "丘" } },
+                { "value": "mountain", "name": { "en": "Mountain", "ja": "山" } },
+                { "value": "coast", "name": { "en": "Coast", "ja": "海岸" } },
+                { "value": "waste", "name": { "en": "Wasteland", "ja": "荒れ地" } }
+              ],
+              "rebuilds": ["cells", "cells.prep"]
+            },
+            {
+              "id": "building",
+              "name": { "en": "Buildings", "ja": "建物の色" },
+              "description": {
+                "en": "The color of the zone's buildings. Empty: the color of the zone's region.",
+                "ja": "地区の建物の色です。空欄のときは、地区の地域の建物の色です。"
+              },
+              "control": "choice",
+              "choices": [
+                { "value": "grey", "name": { "en": "Grey", "ja": "灰" } },
+                { "value": "greygreen", "name": { "en": "Grey-green", "ja": "灰緑" } },
+                { "value": "brown", "name": { "en": "Brown", "ja": "茶" } }
+              ],
+              "rebuilds": ["cells", "cells.prep"]
+            },
+            {
+              "id": "postal",
+              "name": { "en": "Postal code size", "ja": "番地の大きさ" },
+              "description": {
+                "en": "The size of the postal codes in the zone. Empty: the general postal code size.",
+                "ja": "地区の番地の文字の大きさです。空欄のときは、ラベルの「番地の大きさ」です。"
+              },
+              "control": "number",
+              "min": 1,
+              "max": 100,
+              "step": 0.01,
+              "unit": "m",
+              "rebuilds": ["cells", "mapData.labels"]
+            }
+          ],
+          "when": { "key": "groundRaster.mode", "equals": "blend" },
+          "rebuilds": ["cells", "cells.prep", "mapData.labels"]
+        },
+        {
+          "key": "regions.zones",
+          "name": { "en": "Table per zone", "ja": "地区ごとの割り当て" },
+          "description": {
+            "en": "Per game zone: its region (the color of its ground, and its buildings' color when the zone has none of its own), its buildings' color and the size of its postal codes. Empty: the general rule.",
+            "ja": "ゲームの地区ごとに、地域（地面の色。建物の色を決めていない地区は、地域の建物の色にもなります）、建物の色、番地の大きさを決めます。空欄のときは、全体の決まりに従います。"
+          },
+          "control": "table",
+          "columns": [
+            {
+              "id": "region",
+              "name": { "en": "Region", "ja": "地域" },
+              "description": {
+                "en": "The zone's region: the color of its ground. A zone without one takes the region of the nearest zone that has one.",
+                "ja": "地区の地域（地面の色）です。地域のない地区は、いちばん近い、地域のある地区の地域になります。"
+              },
+              "control": "choice",
+              "choices": [
+                { "value": "city", "name": { "en": "City", "ja": "市街" } },
+                { "value": "lowland", "name": { "en": "Lowland", "ja": "低地" } },
+                { "value": "hills", "name": { "en": "Hills", "ja": "丘" } },
+                { "value": "mountain", "name": { "en": "Mountain", "ja": "山" } },
+                { "value": "coast", "name": { "en": "Coast", "ja": "海岸" } },
+                { "value": "waste", "name": { "en": "Wasteland", "ja": "荒れ地" } }
+              ],
+              "rebuilds": ["cells", "cells.prep", "mapData.regions"]
+            },
+            {
+              "id": "building",
+              "name": { "en": "Buildings", "ja": "建物の色" },
+              "description": {
+                "en": "The color of the zone's buildings. Empty: the color of the zone's region.",
+                "ja": "地区の建物の色です。空欄のときは、地区の地域の建物の色です。"
+              },
+              "control": "choice",
+              "choices": [
+                { "value": "grey", "name": { "en": "Grey", "ja": "灰" } },
+                { "value": "greygreen", "name": { "en": "Grey-green", "ja": "灰緑" } },
+                { "value": "brown", "name": { "en": "Brown", "ja": "茶" } }
+              ],
+              "rebuilds": ["cells", "cells.prep"]
+            },
+            {
+              "id": "postal",
+              "name": { "en": "Postal code size", "ja": "番地の大きさ" },
+              "description": {
+                "en": "The size of the postal codes in the zone. Empty: the general postal code size.",
+                "ja": "地区の番地の文字の大きさです。空欄のときは、ラベルの「番地の大きさ」です。"
+              },
+              "control": "number",
+              "min": 1,
+              "max": 100,
+              "step": 0.01,
+              "unit": "m",
+              "rebuilds": ["cells", "mapData.labels"]
+            }
+          ],
+          "when": { "key": "groundRaster.mode", "equals": "regions" },
+          "rebuilds": ["cells", "cells.prep", "mapData.regions", "mapData.labels"]
+        }
+      ]
+    }
+  ]
+}

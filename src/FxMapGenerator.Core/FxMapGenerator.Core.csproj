@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Processing stages, grids, vectors, drawing, tiles, estimates and the project format. No Windows dependency. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp" Version="4.152.1" />
+  </ItemGroup>
+
+  <!-- The stages that write game formats (the minimap's texture dictionaries; later the game files) use GameData. -->
+  <ItemGroup>
+    <ProjectReference Include="..\FxMapGenerator.GameData\FxMapGenerator.GameData.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="FxMapGenerator.Core.Tests" />
+  </ItemGroup>
+
+  <!-- Bundled data (repository data/ folder), read through EmbeddedData.Open("<name>"). -->
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\data\range-default.json" LogicalName="data/range-default.json" />
+    <EmbeddedResource Include="..\..\data\range-presets.json" LogicalName="data/range-presets.json" />
+    <EmbeddedResource Include="..\..\data\timings.json" LogicalName="data/timings.json" />
+    <EmbeddedResource Include="..\..\data\materials.json" LogicalName="data/materials.json" />
+    <EmbeddedResource Include="..\..\data\material-classes.json" LogicalName="data/material-classes.json" />
+    <EmbeddedResource Include="..\..\data\road-edits-default.json" LogicalName="data/road-edits-default.json" />
+    <EmbeddedResource Include="..\..\data\routes.json" LogicalName="data/routes.json" />
+    <EmbeddedResource Include="..\..\data\presets\*.json" LogicalName="data/presets/%(Filename)%(Extension)" />
+    <EmbeddedResource Include="..\..\data\styles\*.json" LogicalName="data/styles/%(Filename)%(Extension)" />
+    <EmbeddedResource Include="..\..\data\style-schema.json" LogicalName="data/style-schema.json" />
+    <EmbeddedResource Include="..\..\data\poi\*.json" LogicalName="data/poi/%(Filename)%(Extension)" />
+    <EmbeddedResource Include="..\..\data\sample-island\*" LogicalName="data/sample-island/%(Filename)%(Extension)" />
+    <EmbeddedResource Include="..\..\data\poi-styles.json" LogicalName="data/poi-styles.json" />
+    <EmbeddedResource Include="..\..\data\mdi-icons.json" LogicalName="data/mdi-icons.json" />
+    <EmbeddedResource Include="..\..\data\minimap\extra-map-tiles\*" LogicalName="data/minimap/extra-map-tiles/%(Filename)%(Extension)" />
+    <EmbeddedResource Include="..\..\data\minimap\extra-map-tiles\stream\*" LogicalName="data/minimap/extra-map-tiles/stream/%(Filename)%(Extension)" />
+    <EmbeddedResource Include="..\..\data\minimap\ydd\*.ydd" LogicalName="data/minimap/ydd/%(Filename)%(Extension)" />
+    <EmbeddedResource Include="..\..\data\viewer\*" LogicalName="data/viewer/%(Filename)%(Extension)" />
+  </ItemGroup>
+
+</Project>

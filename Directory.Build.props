@@ -1,0 +1,18 @@
+<Project>
+
+  <!-- Shared by every project in the repository except third_party/ (which has its own Directory.Build.props). -->
+  <PropertyGroup>
+    <Version>0.1.0</Version>
+    <Authors>Acc-Off</Authors>
+    <Product>FxMapGenerator</Product>
+    <Copyright>Copyright (c) 2026 Acc-Off</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Deterministic>true</Deterministic>
+    <LangVersion>latest</LangVersion>
+    <NeutralLanguage>en</NeutralLanguage>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Game file formats: texture dictionaries (.ytd) and DDS block compression, the RPF archives and their keys, ynd and GXT2. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\third_party\gta-toolkit\RageLib.GTA5\RageLib.GTA5.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCnEncoder.Net" Version="2.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="FxMapGenerator.Core.Tests" />
+  </ItemGroup>
+
+</Project>

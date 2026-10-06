@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Developer commands (checking outputs, measurements, comparison sheets); not shipped. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <AssemblyName>devtools</AssemblyName>
+    <RootNamespace>FxMapGenerator.DevTools</RootNamespace>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\FxMapGenerator.Core\FxMapGenerator.Core.csproj" />
+    <ProjectReference Include="..\..\src\FxMapGenerator.GameData\FxMapGenerator.GameData.csproj" />
+  </ItemGroup>
+
+</Project>
